@@ -1,0 +1,21 @@
+POST /api/as/v1/engines/swiftype-api-example/documents
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: [{\"id\":\"INscMGmhmX4\",\"url\":\"http://www.youtube.com/watch?v=v1uyQZNg2vE\",\"title\":\"The Original Grumpy Cat\",\"body\":\"this is a test\"},{\"id\":\"JNDFojsd02\",\"url\":\"http://www.youtube.com/watch?v=tsdfhk2j\",\"title\":\"Another Grumpy Cat\",\"body\":\"this is also a test\"}]
+
+HTTP/1.1 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+vary: Origin
+etag: W/"1c505a964639396d60ef34105952fd98"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: f8afdd65-b6a4-4fda-bc6d-304ef9d0fafe
+x-runtime: 0.124646
+connection: close
+transfer-encoding: chunked
+
+[{"id":"INscMGmhmX4","errors":[]},{"id":"JNDFojsd02","errors":[]}]

@@ -1,0 +1,21 @@
+DELETE /api/as/v1/engines/swiftype-api-example/documents
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: [\"INscMGmhmX4\",\"FakeId\"]
+
+HTTP/1.1 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+vary: Origin
+etag: W/"ceced1d361650a5d277df9c5c364a48c"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: a3cb32e5-caa3-4e36-ac25-3820fcf8ef0e
+x-runtime: 0.111995
+connection: close
+transfer-encoding: chunked
+
+[{"id":"INscMGmhmX4","result":true},{"id":"FakeId","result":false}]

@@ -1,0 +1,21 @@
+GET /api/as/v1/engines/swiftype-api-example/search
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"query\":\"cat\"}
+
+HTTP/1.1 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+vary: Origin
+etag: W/"fd34dfceda0904c198699f8354e48ee3"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 347bf555-bd81-4ec2-b156-a387ce69354a
+x-runtime: 0.101711
+connection: close
+transfer-encoding: chunked
+
+{"meta":{"page":{"current":1,"total_pages":1,"total_results":2,"size":10},"request_id":"347bf555-bd81-4ec2-b156-a387ce69354a"},"results":[{"body":{"raw":"this is a test"},"title":{"raw":"The Original Grumpy Cat"},"url":{"raw":"http://www.youtube.com/watch?v=v1uyQZNg2vE"},"id":{"raw":"INscMGmhmX4"},"_meta":{"score":0.42733237}},{"body":{"raw":"this is also a test"},"title":{"raw":"Another Grumpy Cat"},"url":{"raw":"http://www.youtube.com/watch?v=tsdfhk2j"},"id":{"raw":"JNDFojsd02"},"_meta":{"score":0.42733237}}]}
