@@ -1,0 +1,26 @@
+POST /api/as/v1/engines/swiftype-api-example/documents
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: [{\"id\":\"INscMGmhmX4\",\"url\":\"http://www.youtube.com/watch?v=v1uyQZNg2vE\",\"title\":\"The Original Grumpy Cat\",\"body\":\"this is a test\"}]
+
+HTTP/1.1 200 OK
+date: Mon, 12 Mar 2018 21:25:29 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+etag: W/"a724d96214a9badc432200ab6d253ac2"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: e47a13e9ba8080ce151027e3195cccc5
+x-runtime: 0.146371
+x-swiftype-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-node: web02.dal05
+
+[{"id":"INscMGmhmX4","errors":[]}]
