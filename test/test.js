@@ -24,12 +24,6 @@ describe('SwiftypeAppSearchClient', () => {
   const swiftype = new SwiftypeAppSearchClient(accountHostKey, apiKey)
 
   describe('#indexDocument', () => {
-    it('should raise an error if the document does not have an id', (done) => {
-      assert.throws(() => swiftype.indexDocument(engineName, { title: 'foo' },
-        /missing required fields \(id\)/))
-      done()
-    })
-
     it('should index a document successfully', (done) => {
       swiftype.indexDocument(engineName, documents[0])
       .then((result) => {
@@ -55,15 +49,6 @@ describe('SwiftypeAppSearchClient', () => {
       .catch((error) => {
         done(error)
       })
-    })
-
-    it('should raise an error if any document does not have an id', (done) => {
-      assert.throws(() => {
-        swiftype.indexDocuments(engineName, [
-          { title: 'foo' }
-        ])
-      }, /missing required fields \(id\)/)
-      done()
     })
   })
 
