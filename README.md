@@ -76,8 +76,8 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
 
     engineName = 'favorite-videos'
     query = 'cat'
-    searchFields = { :title => {} }
-    resultFields = { :title => { :raw => {} } }
+    searchFields = { title: {} }
+    resultFields = { title: { raw: {} } }
     options = { search_fields: searchFields, result_fields: resultFields }
 
     client.search(engineName, query, options)
