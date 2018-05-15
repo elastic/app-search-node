@@ -114,10 +114,10 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#createSignedSearchKey', () => {
     it('should build a valid jwt', (done) => {
-      token = SwiftypeAppSearchClient.createSignedSearchKey('api-mu75psc5egt9ppzuycnc2mc3', 42, { query: 'cat' })
+      token = SwiftypeAppSearchClient.createSignedSearchKey('api-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' })
       jwt = require('jsonwebtoken')
       decoded = jwt.verify(token, 'api-mu75psc5egt9ppzuycnc2mc3')
-      assert.equal(decoded.api_key_id, 42)
+      assert.equal(decoded.api_key_name, 'my-token-name')
       assert.equal(decoded.query, 'cat')
       done()
     })
