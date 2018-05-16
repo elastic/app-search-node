@@ -140,6 +140,21 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#createEngine', () => {
+    it('should create an engine successfully', (done) => {
+      swiftype.createEngine("new-engine")
+      .then((results) => {
+        assert.deepEqual({
+          "name": "new-engine"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#search', () => {
     it('should query', (done) => {
       swiftype.search(engineName, 'cat')

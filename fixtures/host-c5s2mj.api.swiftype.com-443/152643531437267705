@@ -1,0 +1,26 @@
+POST /api/as/v1/engines
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"name\":\"new-engine\"}
+
+HTTP/1.1 200 OK
+date: Wed, 16 May 2018 01:48:34 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+etag: W/"36c4e09df35ed4a65dc5d132bd9a6ffb"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 308ddf80b7f98bff62da82fc1270cfb5
+x-runtime: 0.347975
+x-swiftype-datacenter: dal05
+x-swiftype-frontend-node: web01.dal05
+x-swiftype-edge-node: web01.dal05
+
+{"name":"new-engine"}
