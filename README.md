@@ -4,7 +4,7 @@
 
 ## Installation
 
-To install the gem, execute:
+To install this package, execute:
 
     npm install swiftype-app-search-node
 
@@ -138,4 +138,4 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
 
 ## Contributions
 
-  To contribute code to this gem, please fork the repository and submit a pull request.
+  To contribute code, please fork the repository and submit a pull request.
