@@ -1,0 +1,26 @@
+GET /api/as/v1/engines/swiftype-api-example
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {}
+
+HTTP/1.1 200 OK
+date: Wed, 16 May 2018 01:36:44 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+etag: W/"b33399d52d37875c034420987d0c9a3f"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 5e06f6a80b733ec4341b5e60b7681bd2
+x-runtime: 0.071062
+x-swiftype-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-node: web02.dal05
+
+{"name":"swiftype-api-example"}

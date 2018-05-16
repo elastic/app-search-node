@@ -125,6 +125,21 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#getEngine', () => {
+    it('should get an engine successfully', (done) => {
+      swiftype.getEngine(engineName)
+      .then((results) => {
+        assert.deepEqual({
+          "name": "swiftype-api-example"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#search', () => {
     it('should query', (done) => {
       swiftype.search(engineName, 'cat')
