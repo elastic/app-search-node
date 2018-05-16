@@ -72,6 +72,49 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
       // handle error
     })
 
+### Listing Engines
+
+    client.listEngines()
+    .then((allEngines) => {
+      // handle list of engines
+    })
+    .catch((error) => {
+      // handle error
+    })
+
+### Retrieving Engines
+
+    engineName = 'favorite-videos'
+    client.getEngine(engineName)
+    .then((engineContents) => {
+      // handle engine contents
+    })
+    .catch((error) => {
+      // handle error
+    })
+
+### Creating Engines
+
+    engineName = 'favorite-videos'
+    client.createEngine(engineName)
+    .then((engineContents) => {
+      // handle engine contents
+    })
+    .catch((error) => {
+      // handle error
+    })
+
+### Destroying Engines
+
+    engineName = 'favorite-videos'
+    client.destroyEngine(engineName)
+    .then((destroyEngineResults) => {
+      // handle destroy engine results
+    })
+    .catch((error) => {
+      // handle error
+    })
+
 ### Searching
 
     engineName = 'favorite-videos'
