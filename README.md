@@ -4,7 +4,7 @@
 
 ## Installation
 
-To install the gem, execute:
+To install this package, execute:
 
     npm install swiftype-app-search-node
 
@@ -19,7 +19,12 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
     const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
     const client = new SwiftypeAppSearchClient(accountHostKey, apiKey)
 
-### Indexing: Creating and updating Documents
+### API Methods
+
+This client is a thin interface to the Swiftype App Search Api. Additional details for requests and responses can be
+found in the [documentation](https://swiftype.com/documentation/app-search).
+
+##### Indexing: Creating and updating Documents
 
     const engineName = 'favorite-videos'
     const documents = [
@@ -39,40 +44,55 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
 
 
     client.indexDocuments(engineName, documents)
-    .then((indexDocumentResults) => {
-      // handle index document results
-    })
-    .catch((error) => {
-      // handle error
-    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
-### Retrieving Documents
+##### Retrieving Documents
 
     engineName = 'favorite-videos'
     documentIds = ['INscMGmhmX4', 'JNDFojsd02']
 
     client.getDocuments(engineName, documentIds)
-    .then((documentContents) => {
-      // handle document contents
-    })
-    .catch((error) => {
-      // handle error
-    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
-### Destroying Documents
+##### Destroying Documents
 
     engineName = 'favorite-videos'
     documentIds = ['INscMGmhmX4', 'JNDFojsd02']
 
     client.destroyDocuments(engineName, documentIds)
-    .then((destroyDocumentResults) => {
-      // handle destroy document results
-    })
-    .catch((error) => {
-      // handle error
-    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
-### Searching
+##### Listing Engines
+
+    client.listEngines()
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+
+##### Retrieving Engines
+
+    engineName = 'favorite-videos'
+    client.getEngine(engineName)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+
+##### Creating Engines
+
+    engineName = 'favorite-videos'
+    client.createEngine(engineName)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+
+##### Destroying Engines
+
+    engineName = 'favorite-videos'
+    client.destroyEngine(engineName)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+
+##### Searching
 
     engineName = 'favorite-videos'
     query = 'cat'
@@ -81,12 +101,8 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
     options = { search_fields: searchFields, result_fields: resultFields }
 
     client.search(engineName, query, options)
-    .then((searchResults) => {
-      // handle search results
-    })
-    .catch((error) => {
-      // handle error
-    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
 
 
 ## Running Tests
@@ -95,4 +111,4 @@ Create a new instance of the Swiftype App Search Client. This requires your ACCO
 
 ## Contributions
 
-  To contribute code to this gem, please fork the repository and submit a pull request.
+  To contribute code, please fork the repository and submit a pull request.
