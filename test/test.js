@@ -96,6 +96,35 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#listEngines', () => {
+    it('should list engines successfully', (done) => {
+      swiftype.listEngines()
+      .then((results) => {
+        assert.deepEqual({
+          "meta": {
+            "page": {
+              "current": 1,
+              "total_pages": 1,
+              "total_results": 3,
+              "size": 25
+            }
+          },
+          "results": [{
+            "name": "node-modules"
+          }, {
+            "name": "ruby-gems"
+          }, {
+            "name": "test-engine"
+          }]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#search', () => {
     it('should query', (done) => {
       swiftype.search(engineName, 'cat')
