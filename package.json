@@ -1,6 +1,6 @@
 {
   "name": "swiftype-app-search-node",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Swiftype app-search Node.js client",
   "files": [
     "lib/"
