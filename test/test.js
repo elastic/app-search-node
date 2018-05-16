@@ -96,6 +96,80 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#listEngines', () => {
+    it('should list engines successfully', (done) => {
+      swiftype.listEngines()
+      .then((results) => {
+        assert.deepEqual({
+          "meta": {
+            "page": {
+              "current": 1,
+              "total_pages": 1,
+              "total_results": 3,
+              "size": 25
+            }
+          },
+          "results": [{
+            "name": "node-modules"
+          }, {
+            "name": "ruby-gems"
+          }, {
+            "name": "test-engine"
+          }]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#getEngine', () => {
+    it('should get an engine successfully', (done) => {
+      swiftype.getEngine(engineName)
+      .then((results) => {
+        assert.deepEqual({
+          "name": "swiftype-api-example"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#createEngine', () => {
+    it('should create an engine successfully', (done) => {
+      swiftype.createEngine("new-engine")
+      .then((results) => {
+        assert.deepEqual({
+          "name": "new-engine"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#destroyEngine', () => {
+    it('should delete an engine successfully', (done) => {
+      swiftype.destroyEngine("new-engine")
+      .then((results) => {
+        assert.deepEqual({
+          "deleted": true
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#search', () => {
     it('should query', (done) => {
       swiftype.search(engineName, 'cat')

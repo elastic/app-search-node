@@ -1,0 +1,24 @@
+GET /api/as/v1/engines
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+
+HTTP/1.1 200 OK
+date: Wed, 16 May 2018 01:20:37 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+etag: W/"250d4a4717082f5a2e3b40250c8923f4"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: ed93b4296c3b369916cecd6ef2aef89c
+x-runtime: 0.070549
+x-swiftype-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-node: web02.dal05
+
+{"meta":{"page":{"current":1,"total_pages":1,"total_results":3,"size":25}},"results":[{"name":"node-modules"},{"name":"ruby-gems"},{"name":"test-engine"}]}
