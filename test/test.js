@@ -155,6 +155,21 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#destroyEngine', () => {
+    it('should delete an engine successfully', (done) => {
+      swiftype.destroyEngine("new-engine")
+      .then((results) => {
+        assert.deepEqual({
+          "deleted": true
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#search', () => {
     it('should query', (done) => {
       swiftype.search(engineName, 'cat')
