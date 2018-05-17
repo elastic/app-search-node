@@ -1,7 +1,5 @@
 # Node client for the Swiftype App Search Api
 
-**Note: Swiftype App Search is currently in beta**
-
 ## Installation
 
 To install this package, execute:
