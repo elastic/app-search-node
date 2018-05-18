@@ -65,7 +65,7 @@ found in the [documentation](https://swiftype.com/documentation/app-search).
 
 ##### Listing Engines
 
-    client.listEngines()
+    client.listEngines({page: {size: 10, current: 1}})
     .then(response => console.log(response))
     .catch(error => console.log(error))
 

@@ -123,6 +123,34 @@ describe('SwiftypeAppSearchClient', () => {
         done(error)
       })
     })
+
+    it('should support paging', (done) => {
+      swiftype.listEngines({
+        page: {
+          current: 2,
+          size: 1
+        }
+      })
+      .then((results) => {
+        assert.deepEqual({
+          "meta": {
+            "page": {
+              "current": 2,
+              "total_pages": 3,
+              "total_results": 3,
+              "size": 1
+            }
+          },
+          "results": [{
+            "name": "ruby-gems"
+          }]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
   })
 
   describe('#getEngine', () => {
