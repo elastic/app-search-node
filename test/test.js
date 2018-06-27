@@ -3,8 +3,8 @@ const SwiftypeAppSearchClient = require('../lib/swiftypeAppSearch')
 const replay = require('replay')
 
 describe('SwiftypeAppSearchClient', () => {
-  const accountHostKey = 'host-c5s2mj'
-  const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
+  const hostIdentifier = 'host-c5s2mj'
+  const privateKey = 'api-mu75psc5egt9ppzuycnc2mc3'
   const engineName = 'swiftype-api-example'
   const documents = [
     {
@@ -21,7 +21,7 @@ describe('SwiftypeAppSearchClient', () => {
     }
   ]
 
-  const swiftype = new SwiftypeAppSearchClient(accountHostKey, apiKey)
+  const swiftype = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
 
   describe('#indexDocument', () => {
     it('should index a document successfully', (done) => {
