@@ -13,7 +13,7 @@ To install this package, execute:
 Using this client assumes that you have already created an [App Search](https://swiftype.com/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your authentication credentials, which can be found [here] (https://app.swiftype.com/as/credentials).
 
 - hostIdentifier -> Your **Host Identifier**, should start with `host-`
-- apiKey -> Your **Public Search Key**. It should start with `search-`.
+- apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For information keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
 
 ```
     const SwiftypeAppSearchClient = require('swiftype-app-search-node')
