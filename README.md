@@ -10,12 +10,17 @@ To install this package, execute:
 
 ### Setup: Configuring the client and authentication
 
-Create a new instance of the Swiftype App Search Client. This requires your ACCOUNT_HOST_KEY, which identifies the unique hostname of the Swiftype API that is associated with your Swiftype account. It also requires a valid API_KEY, which authenticates requests to the API:
+Using this client assumes that you have already created an [App Search](https://swiftype.com/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your authentication credentials, which can be found [here] (https://app.swiftype.com/as/credentials).
 
+- hostIdentifier -> Your **Host Identifier**, should start with `host-`
+- apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+
+```
     const SwiftypeAppSearchClient = require('swiftype-app-search-node')
-    const accountHostKey = 'host-c5s2mj'
+    const hostIdentifier = 'host-c5s2mj'
     const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
-    const client = new SwiftypeAppSearchClient(accountHostKey, apiKey)
+    const client = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
+```
 
 ### API Methods
 
