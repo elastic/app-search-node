@@ -1,5 +1,7 @@
 # Node client for the Swiftype App Search Api
 
+[![CircleCI](https://circleci.com/gh/swiftype/swiftype-app-search-node.svg?style=svg)](https://circleci.com/gh/swiftype/swiftype-app-search-node)
+
 ## Installation
 
 To install this package, execute:
