@@ -17,11 +17,23 @@ Using this client assumes that you have already created an [App Search](https://
 - hostIdentifier -> Your **Host Identifier**, should start with `host-`
 - apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
 
+```javascript
+const SwiftypeAppSearchClient = require('swiftype-app-search-node')
+const hostIdentifier = 'host-c5s2mj'
+const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
+const client = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
 ```
-    const SwiftypeAppSearchClient = require('swiftype-app-search-node')
-    const hostIdentifier = 'host-c5s2mj'
-    const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
-    const client = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
+
+### Using with App Search Managed Deploys
+
+ The client can be configured to use a managed deploy by using the
+`baseUrlFn` parameter. Since managed deploys do not rely on a `hostIdentifier`.
+, it can be omitted.
+
+ ```javascript
+const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
+const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
+const client = new SwiftypeAppSearchClient(undefined, apiKey, baseUrlFn)
 ```
 
 ### API Methods
