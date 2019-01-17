@@ -195,6 +195,88 @@ client
   .catch(error => console.log(error.errorMessages))
 ```
 
+##### Listing Curations
+
+```javascript
+const engineName = 'favorite-videos'
+
+client
+  .listCurations(engineName) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+  
+// Pagination details are optional  
+const paginationDetails = {
+        page: {
+          current: 2,
+          size: 10
+        }
+      }
+
+client
+  .listCurations(engineName, paginationDetails) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Retrieving Curations
+
+```javascript
+const engineName = 'favorite-videos'
+const curationId = 'cur-7438290'
+
+client
+  .getCuration(engineName, curationId) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Creating Curations
+
+```javascript
+const engineName = 'favorite-videos'
+const newCuration = {
+  queries: ['cat blop'], 
+  promoted: ['Jdas78932'], 
+  hidden: ['INscMGmhmX4', 'JNDFojsd02']
+}
+
+client
+  .createCuration(engineName, newCuration) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Updating Curations
+
+```javascript
+const engineName = 'favorite-videos'
+const curationId = 'cur-7438290'
+// "queries" is required, either "promoted" or "hidden" is required. 
+// Values sent for all fields will overwrite existing values. 
+const newDetails = {
+  queries: ['cat blop'], 
+  promoted: ['Jdas78932', 'JFayf782']
+}
+
+client
+  .updateCuration(engineName, curationId, newDetails) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Deleting Curations
+
+```javascript
+const engineName = 'favorite-videos'
+const curationId = 'cur-7438290'
+
+client
+  .destroyCuration(engineName, curationId) 
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
 ## Running tests
 
 The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture responses.

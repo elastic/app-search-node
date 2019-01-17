@@ -1,0 +1,29 @@
+GET /api/as/v1/engines/swiftype-api-example/curations
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.5.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {}
+
+HTTP/1.1 200 OK
+date: Thu, 17 Jan 2019 18:56:32 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+status: 401 Unauthorized
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+www-authenticate: Basic realm="Swiftype"
+vary: Origin
+cache-control: no-cache
+x-request-id: c3f4f569d971ad431d1287b3caa52c31
+x-runtime: 0.035655
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web02.dal05
+
+{"meta":{"page":{"current":1,"total_pages":1,"total_results":2,"size":25}},"results":[{"id":"cur-9382","queries":["mew hiss"],"promoted":["INscMGmhmX4"],"hidden":["JNDFojsd02"]},{"id":"cur-378291","queries":["grrr scratch"],"promoted":["JNDFojsd02"],"hidden":["INscMGmhmX4"]}]}

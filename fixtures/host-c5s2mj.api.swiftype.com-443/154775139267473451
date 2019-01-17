@@ -1,0 +1,29 @@
+GET /api/as/v1/engines/swiftype-api-example/curations?page[current]=2&page[size]=1
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.5.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {}
+
+HTTP/1.1 200 OK
+date: Thu, 17 Jan 2019 18:56:32 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+www-authenticate: Basic realm="Swiftype"
+cache-control: no-cache
+x-request-id: 03632a579705aa38573c9fcbd29c0be2
+x-runtime: 0.021305
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web02.dal05
+
+{"meta":{"page":{"current":2,"total_pages":2,"total_results":2,"size":1}},"results":[{"id":"cur-378291","queries":["grrr scratch"],"promoted":["JNDFojsd02"],"hidden":["INscMGmhmX4"]}]}

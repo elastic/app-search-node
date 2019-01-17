@@ -20,6 +20,32 @@ describe('SwiftypeAppSearchClient', () => {
       body: 'this is also a test'
     }
   ]
+  const curations = [
+    {
+      "id": "cur-9382",
+      "queries": [
+        "mew hiss"
+      ],
+      "promoted": [
+        "INscMGmhmX4"
+      ],
+      "hidden": [
+        "JNDFojsd02"
+      ]
+    },
+    {
+      "id": "cur-378291",
+      "queries": [
+        "grrr scratch"
+      ],
+      "promoted": [
+        "JNDFojsd02"
+      ],
+      "hidden": [
+        "INscMGmhmX4"
+      ]
+    }
+  ]
 
   const swiftype = new SwiftypeAppSearchClient(hostIdentifier, apiKey)
 
@@ -299,7 +325,134 @@ describe('SwiftypeAppSearchClient', () => {
       done()
     })
   })
+  
+  describe('#listCurations', () => {
+    it('should list curations successfully', (done) => {
+      swiftype.listCurations(engineName)
+      .then((results) => {
+        assert.deepEqual({
+          "meta": {
+            "page": {
+              "current": 1,
+              "total_pages": 1,
+              "total_results": 2,
+              "size": 25
+            }
+          },
+          "results": curations
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
 
+    it('should support paging', (done) => {
+      swiftype.listCurations(engineName, {
+        page: {
+          current: 2,
+          size: 1
+        }
+      })
+      .then((results) => {
+        assert.deepEqual({
+          "meta": {
+            "page": {
+              "current": 2,
+              "total_pages": 2,
+              "total_results": 2,
+              "size": 1
+            }
+          },
+          "results": [
+            curations[1]
+          ]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+  
+  describe('#getCuration', () => {
+    it('should get a curation successfully', (done) => {
+      const expected = { 
+        meta: { 
+          page: { current: 1, total_pages: 1, total_results: 1, size: 25 } 
+        },
+        results: 
+         [ curations[0] ] 
+       }
+      swiftype.getCuration(engineName, curations[0].id)
+      .then((results) => {
+        assert.deepEqual(expected, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+
+    it('passes along errors', (done) => {
+      swiftype.getCuration(engineName, "cur-0000")
+      .then((results) => {
+        done(new Error('This should have resulted in an error'))
+      })
+      .catch((error) => {
+        assert(error.errorMessages.join().toString() === "Curation not found with id: cur-0000")
+        done()
+      })
+    })
+  })
+
+  describe('#createCuration', () => {
+    it('should create a curation successfully', (done) => {
+      swiftype.createCuration(engineName, {queries: ["arf arf"], promoted: [], hidden: ["INscMGmhmX4", "JNDFojsd02"]})
+      .then((results) => {
+        assert.deepEqual({
+          "id": "cur-9043829"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#destroyCuration', () => {
+    it('should delete a curation successfully', (done) => {
+      swiftype.destroyCuration(engineName, curations[1].id)
+      .then((results) => {
+        assert.deepEqual({
+          "deleted": true
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#updateCuration', () => {
+    it('should update a curation successfully', (done) => {
+      swiftype.updateCuration(engineName, "cur-9382", {queries: ["mew hiss", "sideways hop"], promoted: ["INscMGmhmX4"], hidden: ["JNDFojsd02"]})
+      .then((results) => {
+        assert.deepEqual({
+          "id": "cur-9382"
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+  
   describe('error handling', () => {
     it('should handle 404', (done) => {
       swiftype.search('invalid-engine-name', 'cat')
@@ -375,4 +528,5 @@ describe('SwiftypeAppSearchClient', () => {
       })
     })
   })
+
 })
