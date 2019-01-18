@@ -20,4 +20,4 @@ x-runtime: 0.111995
 connection: close
 transfer-encoding: chunked
 
-[{"id":"INscMGmhmX4","result":true},{"id":"FakeId","result":false}]
+[{"id":"INscMGmhmX4","deleted":true},{"id":"FakeId","deleted":false}]
