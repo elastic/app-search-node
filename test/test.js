@@ -27,7 +27,7 @@ describe('SwiftypeAppSearchClient', () => {
     it('should index a document successfully', (done) => {
       swiftype.indexDocument(engineName, documents[0])
       .then((result) => {
-        assert.deepEqual({ "id": "INscMGmhmX4" }, result)
+        assert.deepEqual({ 'id': 'INscMGmhmX4' }, result)
         done()
       })
       .catch((error) => {
@@ -41,8 +41,8 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.indexDocuments(engineName, documents)
       .then((results) => {
         assert.deepEqual([
-          { "errors": [], "id": "INscMGmhmX4" },
-          { "errors": [], "id": "JNDFojsd02" }
+          { 'errors': [], 'id': 'INscMGmhmX4' },
+          { 'errors': [], 'id': 'JNDFojsd02' }
         ], results)
         done()
       })
@@ -60,16 +60,16 @@ describe('SwiftypeAppSearchClient', () => {
       .then((results) => {
         assert.deepEqual([
           {
-            "body": "this is a test",
-            "id": "INscMGmhmX4",
-            "title": "The Original Grumpy Cat",
-            "url": "http://www.youtube.com/watch?v=v1uyQZNg2vE",
+            'body': 'this is a test',
+            'id': 'INscMGmhmX4',
+            'title': 'The Original Grumpy Cat',
+            'url': 'http://www.youtube.com/watch?v=v1uyQZNg2vE',
           },
           {
-            "body": "this is also a test",
-            "id": "JNDFojsd02",
-            "title": "Another Grumpy Cat",
-            "url": "http://www.youtube.com/watch?v=tsdfhk2j",
+            'body': 'this is also a test',
+            'id': 'JNDFojsd02',
+            'title': 'Another Grumpy Cat',
+            'url': 'http://www.youtube.com/watch?v=tsdfhk2j',
           }
         ], results)
         done()
@@ -82,11 +82,11 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#destroyDocuments', () => {
     it('should destroy documents', (done) => {
-      swiftype.destroyDocuments(engineName, ["INscMGmhmX4", "FakeId"])
+      swiftype.destroyDocuments(engineName, ['INscMGmhmX4', 'FakeId'])
       .then((results) => {
         assert.deepEqual([
-          { "id": "INscMGmhmX4", "result": true },
-          { "id": "FakeId", "result": false },
+          { 'id': 'INscMGmhmX4', 'result': true },
+          { 'id': 'FakeId', 'result': false },
         ], results)
         done()
       })
@@ -101,20 +101,20 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.listEngines()
       .then((results) => {
         assert.deepEqual({
-          "meta": {
-            "page": {
-              "current": 1,
-              "total_pages": 1,
-              "total_results": 3,
-              "size": 25
+          'meta': {
+            'page': {
+              'current': 1,
+              'total_pages': 1,
+              'total_results': 3,
+              'size': 25
             }
           },
-          "results": [{
-            "name": "node-modules"
+          'results': [{
+            'name': 'node-modules'
           }, {
-            "name": "ruby-gems"
+            'name': 'ruby-gems'
           }, {
-            "name": "test-engine"
+            'name': 'test-engine'
           }]
         }, results)
         done()
@@ -133,16 +133,16 @@ describe('SwiftypeAppSearchClient', () => {
       })
       .then((results) => {
         assert.deepEqual({
-          "meta": {
-            "page": {
-              "current": 2,
-              "total_pages": 3,
-              "total_results": 3,
-              "size": 1
+          'meta': {
+            'page': {
+              'current': 2,
+              'total_pages': 3,
+              'total_results': 3,
+              'size': 1
             }
           },
-          "results": [{
-            "name": "ruby-gems"
+          'results': [{
+            'name': 'ruby-gems'
           }]
         }, results)
         done()
@@ -158,7 +158,7 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.getEngine(engineName)
       .then((results) => {
         assert.deepEqual({
-          "name": "swiftype-api-example"
+          'name': 'swiftype-api-example'
         }, results)
         done()
       })
@@ -170,10 +170,10 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#createEngine', () => {
     it('should create an engine successfully', (done) => {
-      swiftype.createEngine("new-engine")
+      swiftype.createEngine('new-engine')
       .then((results) => {
         assert.deepEqual({
-          "name": "new-engine"
+          'name': 'new-engine'
         }, results)
         done()
       })
@@ -185,10 +185,10 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#destroyEngine', () => {
     it('should delete an engine successfully', (done) => {
-      swiftype.destroyEngine("new-engine")
+      swiftype.destroyEngine('new-engine')
       .then((results) => {
         assert.deepEqual({
-          "deleted": true
+          'deleted': true
         }, results)
         done()
       })
@@ -214,6 +214,32 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#multiSearch', () => {
+    it('should query', (done) => {
+      swiftype.multiSearch(engineName, [{
+        query: 'cat',
+        options: {}
+      }, {
+        query: 'grumpy',
+        options: {}
+      }])
+        .then((resp) => {
+          assert.deepEqual(resp.map(res => res.results.map(res => res.title.raw)), [[
+              'The Original Grumpy Cat',
+              'Another Grumpy Cat'
+            ], [
+              'Another Grumpy Cat',
+              'The Original Grumpy Cat'
+            ]
+          ])
+          done()
+        })
+        .catch((error) => {
+          done(error)
+        })
+    })
+  })
+
   describe('#createSignedSearchKey', () => {
     it('should build a valid jwt', (done) => {
       token = SwiftypeAppSearchClient.createSignedSearchKey('private-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' })
@@ -222,6 +248,82 @@ describe('SwiftypeAppSearchClient', () => {
       assert.equal(decoded.api_key_name, 'my-token-name')
       assert.equal(decoded.query, 'cat')
       done()
+    })
+  })
+
+  describe('error handling', () => {
+    it('should handle 404', (done) => {
+      swiftype.search('invalid-engine-name', 'cat')
+        .then(() => {
+          done(new Error('was expected to throw with an error message'))
+        })
+        .catch(error => {
+          const errorMessages = (error && error.errorMessages) ? error.errorMessages : null
+
+          if (errorMessages) {
+            try {
+              assert.deepEqual(errorMessages, ['Could not find engine.'])
+              done()
+            } catch (e) {
+              done(e)
+            }
+          } else {
+            done(error)
+          }
+        })
+    })
+
+    it('should handle auth error', (done) => {
+      const badAuthSwiftype = new SwiftypeAppSearchClient(hostIdentifier, 'invalid')
+      badAuthSwiftype.search(engineName, 'cat')
+      .then(() => {
+        done(new Error('was expected to throw with an error message'))
+      })
+      .catch(error => {
+        const errorMessages = (error && error.errorMessages) ? error.errorMessages : null
+
+        if (errorMessages) {
+          try {
+            assert.deepEqual(errorMessages, ['Invalid authentication token.'])
+            done()
+          } catch (e) {
+            done(e)
+          }
+        } else {
+          done(error)
+        }
+      })
+    })
+
+    it('should handle multi_search errors', (done) => {
+      swiftype.multiSearch(engineName, [
+        {
+          query: 'cat',
+          options: {
+            badField: 'whatever'
+          }
+        }, {
+          query: 'grumpy',
+          options: {}
+        }
+      ])
+      .then(() => {
+        done(new Error('was expected to throw with an error message'))
+      })
+      .catch(error => {
+        const errorMessages = (error && error.errorMessages) ? error.errorMessages : null
+
+        if (errorMessages) {
+          try {
+            assert.deepEqual(errorMessages, ['Options contains invalid key: badField'])
+            done()
+          } catch (e) {
+            done(e)
+          }
+        } else {
+          done(error)
+        }
+      })
     })
   })
 })

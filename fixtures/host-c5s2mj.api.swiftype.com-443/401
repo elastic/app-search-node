@@ -1,0 +1,29 @@
+GET /api/as/v1/engines/swiftype-api-example/search
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.3.1
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer invalid
+accept: application/json
+body: {\"query\":\"cat\"}
+
+HTTP/1.1 401 Unauthorized
+date: Mon, 28 Jan 2019 15:29:54 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+status: 401 Unauthorized
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+www-authenticate: Basic realm="Swiftype"
+vary: Origin
+cache-control: no-cache
+x-request-id: 35f86e7b2507d8437778666411599f3e
+x-runtime: 0.022311
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web02.dal05
+
+{"error":"Invalid authentication token."}

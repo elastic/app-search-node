@@ -1,0 +1,30 @@
+GET /api/as/v1/engines/invalid-engine-name/search
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.3.1
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"query\":\"cat\"}
+
+HTTP/1.1 404 Not Found
+date: Mon, 28 Jan 2019 15:31:36 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 404 Not Found
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-ratelimit-limit: 6000
+x-ratelimit-remaining: 5999
+cache-control: no-cache
+x-request-id: 7a6ce42f728bac23a887f64468a41a8d
+x-runtime: 0.044010
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web02.dal05
+
+{"errors":["Could not find engine."]}
