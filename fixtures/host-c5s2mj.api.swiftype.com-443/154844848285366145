@@ -1,0 +1,31 @@
+POST /api/as/v1/engines/swiftype-api-example/multi_search
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.4.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"queries\":[{\"query\":\"cat\"},{\"query\":\"grumpy\"}]}
+
+HTTP/1.1 200 OK
+date: Fri, 25 Jan 2019 20:34:42 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-ratelimit-limit: 2400
+x-ratelimit-remaining: 2397
+etag: W/"97487a783361f0beef00632c932f7d96"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 40b424eace5b5edd28157be497d52c7b
+x-runtime: 0.082590
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web01.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web01.dal05
+
+[{"meta":{"warnings":[],"page":{"current":1,"total_pages":1,"total_results":2,"size":10}},"results":[{"body":{"raw":"A wonderful video of a magnificent cat."},"title":{"raw":"The Original Grumpy Cat"},"url":{"raw":"https://www.youtube.com/watch?v=INscMGmhmX4"},"id":{"raw":"INscMGmhmX4"},"_meta":{"score":0.459039}},{"body":{"raw":"A great video of another cool cat."},"title":{"raw":"Another Grumpy Cat"},"url":{"raw":"https://www.youtube.com/watch?v=dQw4w9WgXcQ"},"id":{"raw":"JNDFojsd02"},"_meta":{"score":0.4121608}}]},{"meta":{"warnings":[],"page":{"current":1,"total_pages":1,"total_results":2,"size":10}},"results":[{"body":{"raw":"A great video of another cool cat."},"title":{"raw":"Another Grumpy Cat"},"url":{"raw":"https://www.youtube.com/watch?v=dQw4w9WgXcQ"},"id":{"raw":"JNDFojsd02"},"_meta":{"score":0.39919013}},{"body":{"raw":"A wonderful video of a magnificent cat."},"title":{"raw":"The Original Grumpy Cat"},"url":{"raw":"https://www.youtube.com/watch?v=INscMGmhmX4"},"id":{"raw":"INscMGmhmX4"},"_meta":{"score":0.39919013}}]}]

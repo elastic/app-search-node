@@ -75,7 +75,7 @@ const documentIds = ['INscMGmhmX4', 'JNDFojsd02']
 client
   .getDocuments(engineName, documentIds)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Destroying Documents
@@ -87,7 +87,7 @@ const documentIds = ['INscMGmhmX4', 'JNDFojsd02']
 client
   .destroyDocuments(engineName, documentIds)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Listing Engines
@@ -96,7 +96,7 @@ client
 client
   .listEngines({ page: { size: 10, current: 1 } })
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Retrieving Engines
@@ -107,7 +107,7 @@ const engineName = 'favorite-videos'
 client
   .getEngine(engineName)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Creating Engines
@@ -118,7 +118,7 @@ const engineName = 'favorite-videos'
 client
   .createEngine(engineName)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Destroying Engines
@@ -129,7 +129,7 @@ const engineName = 'favorite-videos'
 client
   .destroyEngine(engineName)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ##### Searching
@@ -144,12 +144,41 @@ const options = { search_fields: searchFields, result_fields: resultFields }
 client
   .search(engineName, query, options)
   .then(response => console.log(response))
-  .catch(error => console.log(error))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Multi-Search
+
+```javascript
+engineName = 'favorite-videos'
+searches = [
+  { query: 'cat', options: {
+      search_fields: { title: {} },
+      result_fields: { title: { raw: {} } }
+  } },
+  { query: 'grumpy', options: {} }
+]
+
+client
+  .multiSearch(engineName, searches)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
 ```
 
 ## Running Tests
 
     $ npm test
+
+## Adding and updating tests
+
+The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture responses.
+
+To capture new responses, run tests with the following commands:
+
+```
+nvm use // Be sure to use the correct version of node
+REPLAY=record npm test
+```
 
 ## Contributions
 
