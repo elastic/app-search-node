@@ -1,18 +1,34 @@
-# Node client for the Swiftype App Search Api
+<p align="center"><img src="https://github.com/swiftype/swiftype-app-search-node/blob/master/logo-app-search.png?raw=true" alt="Elastic App Search Logo"></p>
 
-[![CircleCI](https://circleci.com/gh/swiftype/swiftype-app-search-node.svg?style=svg)](https://circleci.com/gh/swiftype/swiftype-app-search-node)
+<p align="center"><a href="https://circleci.com/gh/swiftype/swiftype-app-search-node"><img src="https://circleci.com/gh/swiftype/swiftype-app-search-node.svg?style=svg" alt="CircleCI buidl"></a>
+<a href="https://github.com/swiftype/swiftype-app-search-node/releases"><img src="https://img.shields.io/github/release/swiftype/swiftype-app-search-node/all.svg?style=flat-square" alt="GitHub release" /></a></p>
 
-## Installation
+> A first-party Node.JS client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/cloud/app-search-service).
 
-To install this package, execute:
+## Contents
 
-    npm install swiftype-app-search-node
+- [Getting started](#getting-started-)
+- [Usage](#usage)
+- [Running tests](#running-tests)
+- [FAQ](#faq-)
+- [Contribute](#contribute-)
+- [License](#license-)
+
+---
+
+## Getting started 🐣
+
+To install this package, run:
+
+```bash
+npm install swiftype-app-search-node
+```
 
 ## Usage
 
 ### Setup: Configuring the client and authentication
 
-Using this client assumes that you have already created an [App Search](https://swiftype.com/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your authentication credentials, which can be found [here] (https://app.swiftype.com/as/credentials).
+Using this client assumes that you have already created an [App Search](https://swiftype.com/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your [authentication credentials](https://app.swiftype.com/as/credentials).
 
 - hostIdentifier -> Your **Host Identifier**, should start with `host-`
 - apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
@@ -26,9 +42,7 @@ const client = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
 
 ### Using with App Search Managed Deploys
 
- The client can be configured to use a managed deploy by using the
-`baseUrlFn` parameter. Since managed deploys do not rely on a `hostIdentifier`.
-, it can be omitted.
+ The client can be configured to use a managed deploy by using the `baseUrlFn` parameter. Since managed deploys do not rely on a `hostIdentifier`, it can be omitted.
 
  ```javascript
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
@@ -37,9 +51,6 @@ const client = new SwiftypeAppSearchClient(undefined, apiKey, baseUrlFn)
 ```
 
 ### API Methods
-
-This client is a thin interface to the Swiftype App Search Api. Additional details for requests and responses can be
-found in the [documentation](https://swiftype.com/documentation/app-search).
 
 ##### Indexing: Creating and updating Documents
 
@@ -165,21 +176,46 @@ client
   .catch(error => console.log(error.errorMessages))
 ```
 
-## Running Tests
-
-    $ npm test
-
-## Adding and updating tests
+## Running tests
 
 The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture responses.
 
 To capture new responses, run tests with the following commands:
 
-```
-nvm use // Be sure to use the correct version of node
+```bash
+nvm use
 REPLAY=record npm test
 ```
 
-## Contributions
+Otherwise:
 
-  To contribute code, please fork the repository and submit a pull request.
+```bash
+npm test
+```
+
+## FAQ 🔮
+
+### Where do I report issues with the client?
+
+If something is not working as expected, please open an [issue](https://github.com/swiftype/swiftype-app-search-node/issues/new).
+
+### Where can I learn more about App Search?
+
+Your best bet is to read the [documentation](https://swiftype.com/documentation/app-search).
+
+### Where else can I go to get help?
+
+You can checkout the [Elastic App Search community discuss forums](https://discuss.elastic.co/c/app-search).
+
+## Contribute 🚀
+
+We welcome contributors to the project. Before you begin, a couple notes...
+
+- Prior to opening a pull request, please create an issue to [discuss the scope of your proposal](https://github.com/swiftype/swiftype-app-search-node/issues).
+- Please write simple code and concise documentation, when appropriate.
+
+## License 📗
+
+[MIT](https://github.com/swiftype/swiftype-app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
+
+Thank you to all the [contributors](https://github.com/swiftype/swiftype-app-search-node/graphs/contributors)!
