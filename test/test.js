@@ -240,6 +240,43 @@ describe('SwiftypeAppSearchClient', () => {
     })
   })
 
+  describe('#querySuggestion', () => {
+    it('should request query suggestions', (done) => {
+      swiftype.querySuggestion(engineName, 'cat')
+        .then((resp) => {
+          assert.deepEqual({
+            results: { documents: [{ suggestion: "cat" }] },
+            meta: { request_id: "7414beb06c644b1aa88accb6019c6d6f" }
+          }, resp)
+          done()
+        })
+        .catch((error) => {
+          done(error)
+        })
+    })
+
+    it('should request query suggestions with options', (done) => {
+      swiftype.querySuggestion(engineName, 'cat', {
+          size: 3,
+          types: {
+            documents: {
+              fields: ['title']
+            }
+          }
+        })
+        .then((resp) => {
+          assert.deepEqual({
+            results: { documents: [{ suggestion: "cat" }] },
+            meta: { request_id: "a0e24c46d4379e58bf871a6a515b8d94" }
+          }, resp)
+          done()
+        })
+        .catch((error) => {
+          done(error)
+        })
+    })
+  })
+
   describe('#createSignedSearchKey', () => {
     it('should build a valid jwt', (done) => {
       token = SwiftypeAppSearchClient.createSignedSearchKey('private-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' })

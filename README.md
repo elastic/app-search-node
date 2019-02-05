@@ -161,8 +161,8 @@ client
 ##### Multi-Search
 
 ```javascript
-engineName = 'favorite-videos'
-searches = [
+const engineName = 'favorite-videos'
+const searches = [
   { query: 'cat', options: {
       search_fields: { title: {} },
       result_fields: { title: { raw: {} } }
@@ -172,6 +172,25 @@ searches = [
 
 client
   .multiSearch(engineName, searches)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Query Suggestion
+
+```javascript
+const engineName = 'favorite-videos'
+const options = {
+  size: 3,
+  types: {
+    documents: {
+      fields: ['title']
+    }
+  }
+}
+
+client
+  .querySuggestion(engineName, 'cat', options)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```

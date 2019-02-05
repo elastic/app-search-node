@@ -1,0 +1,31 @@
+POST /api/as/v1/engines/swiftype-api-example/query_suggestion
+x-swiftype-client: swiftype-app-search-node
+x-swiftype-client-version: 0.4.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"query\":\"cat\"}
+
+HTTP/1.1 200 OK
+date: Fri, 01 Feb 2019 21:20:58 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-ratelimit-limit: 6000
+x-ratelimit-remaining: 5994
+etag: W/"527a446e8aab1ba89e4c08f53dbbd470"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 7414beb06c644b1aa88accb6019c6d6f
+x-runtime: 0.168318
+x-swiftype-frontend-datacenter: dal05
+x-swiftype-frontend-node: web02.dal05
+x-swiftype-edge-datacenter: dal05
+x-swiftype-edge-node: web02.dal05
+
+{"results":{"documents":[{"suggestion":"cat"}]},"meta":{"request_id":"7414beb06c644b1aa88accb6019c6d6f"}}
