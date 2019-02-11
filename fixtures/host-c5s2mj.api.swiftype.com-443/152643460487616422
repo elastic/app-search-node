@@ -25,4 +25,4 @@ x-swiftype-datacenter: dal05
 x-swiftype-frontend-node: web02.dal05
 x-swiftype-edge-node: web02.dal05
 
-{"name":"swiftype-api-example"}
+{"name":"swiftype-api-example","type":"default","language":null}

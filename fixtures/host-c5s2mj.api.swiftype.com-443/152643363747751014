@@ -23,4 +23,4 @@ x-swiftype-datacenter: dal05
 x-swiftype-frontend-node: web02.dal05
 x-swiftype-edge-node: web02.dal05
 
-{"meta":{"page":{"current":1,"total_pages":1,"total_results":3,"size":25}},"results":[{"name":"node-modules"},{"name":"ruby-gems"},{"name":"test-engine"}]}
+{"meta":{"page":{"current":1,"total_pages":1,"total_results":3,"size":25}},"results":[{"name":"node-modules","type":"default","language":null},{"name":"ruby-gems","type":"default","language":null},{"name":"test-engine","type":"default","language":null}]}

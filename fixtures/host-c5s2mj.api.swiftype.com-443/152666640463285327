@@ -25,4 +25,4 @@ x-swiftype-datacenter: dal05
 x-swiftype-frontend-node: web01.dal05
 x-swiftype-edge-node: web01.dal05
 
-{"meta":{"page":{"current":2,"total_pages":3,"total_results":3,"size":1}},"results":[{"name":"ruby-gems"}]}
+{"meta":{"page":{"current":2,"total_pages":3,"total_results":3,"size":1}},"results":[{"name":"ruby-gems","type":"default","language":null}]}

@@ -25,4 +25,4 @@ x-swiftype-datacenter: dal05
 x-swiftype-frontend-node: web01.dal05
 x-swiftype-edge-node: web01.dal05
 
-{"name":"new-engine"}
+{"name":"new-engine","type":"default","language":null}

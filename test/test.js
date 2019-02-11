@@ -85,8 +85,8 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.destroyDocuments(engineName, ['INscMGmhmX4', 'FakeId'])
       .then((results) => {
         assert.deepEqual([
-          { 'id': 'INscMGmhmX4', 'result': true },
-          { 'id': 'FakeId', 'result': false },
+          { 'id': 'INscMGmhmX4', 'deleted': true, 'result': true },
+          { 'id': 'FakeId', 'deleted': false, 'result': false },
         ], results)
         done()
       })
@@ -110,11 +110,17 @@ describe('SwiftypeAppSearchClient', () => {
             }
           },
           'results': [{
-            'name': 'node-modules'
+            'name': 'node-modules',
+            'type': 'default',
+            'language': null
           }, {
-            'name': 'ruby-gems'
+            'name': 'ruby-gems',
+            'type': 'default',
+            'language': null
           }, {
-            'name': 'test-engine'
+            'name': 'test-engine',
+            'type': 'default',
+            'language': null
           }]
         }, results)
         done()
@@ -142,7 +148,9 @@ describe('SwiftypeAppSearchClient', () => {
             }
           },
           'results': [{
-            'name': 'ruby-gems'
+            'name': 'ruby-gems',
+            'type': 'default',
+            'language': null
           }]
         }, results)
         done()
@@ -158,7 +166,9 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.getEngine(engineName)
       .then((results) => {
         assert.deepEqual({
-          'name': 'swiftype-api-example'
+          'name': 'swiftype-api-example',
+          'type': 'default',
+          'language': null
         }, results)
         done()
       })
@@ -173,7 +183,9 @@ describe('SwiftypeAppSearchClient', () => {
       swiftype.createEngine('new-engine')
       .then((results) => {
         assert.deepEqual({
-          'name': 'new-engine'
+          'name': 'new-engine',
+          'type': 'default',
+          'language': null
         }, results)
         done()
       })
