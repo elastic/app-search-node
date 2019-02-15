@@ -2,7 +2,7 @@ POST /api/as/v1/engines
 content-type: application/json
 host: host-c5s2mj.api.swiftype.com
 x-swiftype-client: swiftype-app-search-node
-x-swiftype-client-version: 0.5.0
+x-swiftype-client-version: 0.6.0
 authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
 accept: application/json
 body: {\"name\":\"new-engine\"}

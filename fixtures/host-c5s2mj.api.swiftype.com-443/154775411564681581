@@ -1,6 +1,6 @@
 PUT /api/as/v1/engines/swiftype-api-example/curations/cur-9382
 x-swiftype-client: swiftype-app-search-node
-x-swiftype-client-version: 0.5.0
+x-swiftype-client-version: 0.6.0
 content-type: application/json
 host: host-c5s2mj.api.swiftype.com
 authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
