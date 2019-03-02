@@ -37,7 +37,7 @@ Using this client assumes that you have already created an [App Search](https://
 const SwiftypeAppSearchClient = require('swiftype-app-search-node')
 const hostIdentifier = 'host-c5s2mj'
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const client = new SwiftypeAppSearchClient(hostIdentifier, privateKey)
+const client = new SwiftypeAppSearchClient(hostIdentifier, apiKey)
 ```
 
 ### Using with App Search Managed Deploys
