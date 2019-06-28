@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/swiftype/swiftype-app-search-node#readme",
   "devDependencies": {
-    "mocha": "^4.0.0",
+    "mocha": "^5.0.0",
     "replay": "^2.1.2"
   },
   "dependencies": {
