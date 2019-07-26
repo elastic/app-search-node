@@ -1,7 +1,7 @@
-<p align="center"><img src="https://github.com/swiftype/swiftype-app-search-node/blob/master/logo-app-search.png?raw=true" alt="Elastic App Search Logo"></p>
+<p align="center"><img src="https://github.com/elastic/app-search-node/blob/master/logo-app-search.png?raw=true" alt="Elastic App Search Logo"></p>
 
-<p align="center"><a href="https://circleci.com/gh/swiftype/swiftype-app-search-node"><img src="https://circleci.com/gh/swiftype/swiftype-app-search-node.svg?style=svg" alt="CircleCI buidl"></a>
-<a href="https://github.com/swiftype/swiftype-app-search-node/releases"><img src="https://img.shields.io/github/release/swiftype/swiftype-app-search-node/all.svg?style=flat-square" alt="GitHub release" /></a></p>
+<p align="center"><a href="https://circleci.com/gh/elastic/app-search-node"><img src="https://circleci.com/gh/elastic/app-search-node.svg?style=svg" alt="CircleCI buidl"></a>
+<a href="https://github.com/elastic/app-search-node/releases"><img src="https://img.shields.io/github/release/elastic/app-search-node/all.svg?style=flat-square" alt="GitHub release" /></a></p>
 
 > A first-party Node.JS client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/cloud/app-search-service).
 
@@ -21,23 +21,23 @@
 To install this package, run:
 
 ```bash
-npm install swiftype-app-search-node
+npm install @elastic/app-search-node
 ```
 
 ## Usage
 
 ### Setup: Configuring the client and authentication
 
-Using this client assumes that you have already created an [App Search](https://swiftype.com/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your [authentication credentials](https://app.swiftype.com/as/credentials).
+Using this client assumes that you have already created an [App Search](https://www.elastic.co/products/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your [authentication credentials](https://app.swiftype.com/as/credentials).
 
 - hostIdentifier -> Your **Host Identifier**, should start with `host-`
-- apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+- apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/api/credentials).
 
 ```javascript
-const SwiftypeAppSearchClient = require('swiftype-app-search-node')
+const AppSearchClient = require('@elastic/app-search-node')
 const hostIdentifier = 'host-c5s2mj'
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const client = new SwiftypeAppSearchClient(hostIdentifier, apiKey)
+const client = new AppSearchClient(hostIdentifier, apiKey)
 ```
 
 ### Using with App Search Managed Deploys
@@ -47,7 +47,7 @@ const client = new SwiftypeAppSearchClient(hostIdentifier, apiKey)
  ```javascript
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
 const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
-const client = new SwiftypeAppSearchClient(undefined, apiKey, baseUrlFn)
+const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 ```
 
 ### API Methods
@@ -201,11 +201,11 @@ client
 const engineName = 'favorite-videos'
 
 client
-  .listCurations(engineName) 
+  .listCurations(engineName)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
-  
-// Pagination details are optional  
+
+// Pagination details are optional
 const paginationDetails = {
         page: {
           current: 2,
@@ -214,7 +214,7 @@ const paginationDetails = {
       }
 
 client
-  .listCurations(engineName, paginationDetails) 
+  .listCurations(engineName, paginationDetails)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -226,7 +226,7 @@ const engineName = 'favorite-videos'
 const curationId = 'cur-7438290'
 
 client
-  .getCuration(engineName, curationId) 
+  .getCuration(engineName, curationId)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -236,13 +236,13 @@ client
 ```javascript
 const engineName = 'favorite-videos'
 const newCuration = {
-  queries: ['cat blop'], 
-  promoted: ['Jdas78932'], 
+  queries: ['cat blop'],
+  promoted: ['Jdas78932'],
   hidden: ['INscMGmhmX4', 'JNDFojsd02']
 }
 
 client
-  .createCuration(engineName, newCuration) 
+  .createCuration(engineName, newCuration)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -252,15 +252,15 @@ client
 ```javascript
 const engineName = 'favorite-videos'
 const curationId = 'cur-7438290'
-// "queries" is required, either "promoted" or "hidden" is required. 
-// Values sent for all fields will overwrite existing values. 
+// "queries" is required, either "promoted" or "hidden" is required.
+// Values sent for all fields will overwrite existing values.
 const newDetails = {
-  queries: ['cat blop'], 
+  queries: ['cat blop'],
   promoted: ['Jdas78932', 'JFayf782']
 }
 
 client
-  .updateCuration(engineName, curationId, newDetails) 
+  .updateCuration(engineName, curationId, newDetails)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -272,7 +272,7 @@ const engineName = 'favorite-videos'
 const curationId = 'cur-7438290'
 
 client
-  .destroyCuration(engineName, curationId) 
+  .destroyCuration(engineName, curationId)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -298,7 +298,7 @@ npm test
 
 ### Where do I report issues with the client?
 
-If something is not working as expected, please open an [issue](https://github.com/swiftype/swiftype-app-search-node/issues/new).
+If something is not working as expected, please open an [issue](https://github.com/elastic/app-search-node/issues/new).
 
 ### Where can I learn more about App Search?
 
@@ -312,11 +312,11 @@ You can checkout the [Elastic App Search community discuss forums](https://discu
 
 We welcome contributors to the project. Before you begin, a couple notes...
 
-- Prior to opening a pull request, please create an issue to [discuss the scope of your proposal](https://github.com/swiftype/swiftype-app-search-node/issues).
+- Prior to opening a pull request, please create an issue to [discuss the scope of your proposal](https://github.com/elastic/app-search-node/issues).
 - Please write simple code and concise documentation, when appropriate.
 
 ## License 📗
 
-[MIT](https://github.com/swiftype/swiftype-app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
+[Apache 2.0](https://github.com/elastic/app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
-Thank you to all the [contributors](https://github.com/swiftype/swiftype-app-search-node/graphs/contributors)!
+Thank you to all the [contributors](https://github.com/elastic/app-search-node/graphs/contributors)!

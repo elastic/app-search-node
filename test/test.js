@@ -1,8 +1,26 @@
+/*
+
+Copyright 2019 Elastic and contributors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
 const assert = require('assert')
-const SwiftypeAppSearchClient = require('../lib/swiftypeAppSearch')
+const AppSearchClient = require('../lib/appSearch')
 const replay = require('replay')
 
-describe('SwiftypeAppSearchClient', () => {
+describe('AppSearchClient', () => {
   const hostIdentifier = 'host-c5s2mj'
   const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
   const engineName = 'swiftype-api-example'
@@ -47,11 +65,11 @@ describe('SwiftypeAppSearchClient', () => {
     }
   ]
 
-  const swiftype = new SwiftypeAppSearchClient(hostIdentifier, apiKey)
+  const client = new AppSearchClient(hostIdentifier, apiKey)
 
   describe('#indexDocument', () => {
     it('should index a document successfully', (done) => {
-      swiftype.indexDocument(engineName, documents[0])
+      client.indexDocument(engineName, documents[0])
       .then((result) => {
         assert.deepEqual({ 'id': 'INscMGmhmX4' }, result)
         done()
@@ -64,7 +82,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#indexDocuments', () => {
     it('should index documents successfully', (done) => {
-      swiftype.indexDocuments(engineName, documents)
+      client.indexDocuments(engineName, documents)
       .then((results) => {
         assert.deepEqual([
           { 'errors': [], 'id': 'INscMGmhmX4' },
@@ -82,7 +100,7 @@ describe('SwiftypeAppSearchClient', () => {
     const documentIds = documents.map((d) => d.id)
 
     it('should get documents successfully', (done) => {
-      swiftype.getDocuments(engineName, documentIds)
+      client.getDocuments(engineName, documentIds)
       .then((results) => {
         assert.deepEqual([
           {
@@ -108,7 +126,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#destroyDocuments', () => {
     it('should destroy documents', (done) => {
-      swiftype.destroyDocuments(engineName, ['INscMGmhmX4', 'FakeId'])
+      client.destroyDocuments(engineName, ['INscMGmhmX4', 'FakeId'])
       .then((results) => {
         assert.deepEqual([
           { 'id': 'INscMGmhmX4', 'deleted': true, 'result': true },
@@ -124,7 +142,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#listEngines', () => {
     it('should list engines successfully', (done) => {
-      swiftype.listEngines()
+      client.listEngines()
       .then((results) => {
         assert.deepEqual({
           'meta': {
@@ -157,7 +175,7 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('should support paging', (done) => {
-      swiftype.listEngines({
+      client.listEngines({
         page: {
           current: 2,
           size: 1
@@ -189,7 +207,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#getEngine', () => {
     it('should get an engine successfully', (done) => {
-      swiftype.getEngine(engineName)
+      client.getEngine(engineName)
       .then((results) => {
         assert.deepEqual({
           'name': 'swiftype-api-example',
@@ -206,7 +224,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#createEngine', () => {
     it('should create an engine successfully', (done) => {
-      swiftype.createEngine('new-engine')
+      client.createEngine('new-engine')
       .then((results) => {
         assert.deepEqual({
           'name': 'new-engine',
@@ -223,7 +241,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#destroyEngine', () => {
     it('should delete an engine successfully', (done) => {
-      swiftype.destroyEngine('new-engine')
+      client.destroyEngine('new-engine')
       .then((results) => {
         assert.deepEqual({
           'deleted': true
@@ -238,7 +256,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#search', () => {
     it('should query', (done) => {
-      swiftype.search(engineName, 'cat')
+      client.search(engineName, 'cat')
       .then((resp) => {
         assert.deepEqual([
           { raw: 'The Original Grumpy Cat' },
@@ -254,7 +272,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#multiSearch', () => {
     it('should query', (done) => {
-      swiftype.multiSearch(engineName, [{
+      client.multiSearch(engineName, [{
         query: 'cat',
         options: {}
       }, {
@@ -280,7 +298,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#querySuggestion', () => {
     it('should request query suggestions', (done) => {
-      swiftype.querySuggestion(engineName, 'cat')
+      client.querySuggestion(engineName, 'cat')
         .then((resp) => {
           assert.deepEqual({
             results: { documents: [{ suggestion: "cat" }] },
@@ -294,7 +312,7 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('should request query suggestions with options', (done) => {
-      swiftype.querySuggestion(engineName, 'cat', {
+      client.querySuggestion(engineName, 'cat', {
           size: 3,
           types: {
             documents: {
@@ -317,7 +335,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#createSignedSearchKey', () => {
     it('should build a valid jwt', (done) => {
-      token = SwiftypeAppSearchClient.createSignedSearchKey('private-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' })
+      token = AppSearchClient.createSignedSearchKey('private-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' })
       jwt = require('jsonwebtoken')
       decoded = jwt.verify(token, 'private-mu75psc5egt9ppzuycnc2mc3')
       assert.equal(decoded.api_key_name, 'my-token-name')
@@ -325,10 +343,10 @@ describe('SwiftypeAppSearchClient', () => {
       done()
     })
   })
-  
+
   describe('#listCurations', () => {
     it('should list curations successfully', (done) => {
-      swiftype.listCurations(engineName)
+      client.listCurations(engineName)
       .then((results) => {
         assert.deepEqual({
           "meta": {
@@ -349,7 +367,7 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('should support paging', (done) => {
-      swiftype.listCurations(engineName, {
+      client.listCurations(engineName, {
         page: {
           current: 2,
           size: 1
@@ -376,17 +394,17 @@ describe('SwiftypeAppSearchClient', () => {
       })
     })
   })
-  
+
   describe('#getCuration', () => {
     it('should get a curation successfully', (done) => {
-      const expected = { 
-        meta: { 
-          page: { current: 1, total_pages: 1, total_results: 1, size: 25 } 
+      const expected = {
+        meta: {
+          page: { current: 1, total_pages: 1, total_results: 1, size: 25 }
         },
-        results: 
-         [ curations[0] ] 
+        results:
+         [ curations[0] ]
        }
-      swiftype.getCuration(engineName, curations[0].id)
+      client.getCuration(engineName, curations[0].id)
       .then((results) => {
         assert.deepEqual(expected, results)
         done()
@@ -397,7 +415,7 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('passes along errors', (done) => {
-      swiftype.getCuration(engineName, "cur-0000")
+      client.getCuration(engineName, "cur-0000")
       .then((results) => {
         done(new Error('This should have resulted in an error'))
       })
@@ -410,7 +428,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#createCuration', () => {
     it('should create a curation successfully', (done) => {
-      swiftype.createCuration(engineName, {queries: ["arf arf"], promoted: [], hidden: ["INscMGmhmX4", "JNDFojsd02"]})
+      client.createCuration(engineName, {queries: ["arf arf"], promoted: [], hidden: ["INscMGmhmX4", "JNDFojsd02"]})
       .then((results) => {
         assert.deepEqual({
           "id": "cur-9043829"
@@ -425,7 +443,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#destroyCuration', () => {
     it('should delete a curation successfully', (done) => {
-      swiftype.destroyCuration(engineName, curations[1].id)
+      client.destroyCuration(engineName, curations[1].id)
       .then((results) => {
         assert.deepEqual({
           "deleted": true
@@ -440,7 +458,7 @@ describe('SwiftypeAppSearchClient', () => {
 
   describe('#updateCuration', () => {
     it('should update a curation successfully', (done) => {
-      swiftype.updateCuration(engineName, "cur-9382", {queries: ["mew hiss", "sideways hop"], promoted: ["INscMGmhmX4"], hidden: ["JNDFojsd02"]})
+      client.updateCuration(engineName, "cur-9382", {queries: ["mew hiss", "sideways hop"], promoted: ["INscMGmhmX4"], hidden: ["JNDFojsd02"]})
       .then((results) => {
         assert.deepEqual({
           "id": "cur-9382"
@@ -452,10 +470,10 @@ describe('SwiftypeAppSearchClient', () => {
       })
     })
   })
-  
+
   describe('error handling', () => {
     it('should handle 404', (done) => {
-      swiftype.search('invalid-engine-name', 'cat')
+      client.search('invalid-engine-name', 'cat')
         .then(() => {
           done(new Error('was expected to throw with an error message'))
         })
@@ -476,8 +494,8 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('should handle auth error', (done) => {
-      const badAuthSwiftype = new SwiftypeAppSearchClient(hostIdentifier, 'invalid')
-      badAuthSwiftype.search(engineName, 'cat')
+      const badAuthClient = new AppSearchClient(hostIdentifier, 'invalid')
+      badAuthClient.search(engineName, 'cat')
       .then(() => {
         done(new Error('was expected to throw with an error message'))
       })
@@ -498,7 +516,7 @@ describe('SwiftypeAppSearchClient', () => {
     })
 
     it('should handle multi_search errors', (done) => {
-      swiftype.multiSearch(engineName, [
+      client.multiSearch(engineName, [
         {
           query: 'cat',
           options: {
