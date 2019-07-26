@@ -1,0 +1,2 @@
+Elastic App Search Node client.
+Copyright 2012-2019 Elasticsearch B.V.

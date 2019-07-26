@@ -317,6 +317,6 @@ We welcome contributors to the project. Before you begin, a couple notes...
 
 ## License 📗
 
-[MIT](https://github.com/elastic/app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
+[Apache License 2.0](https://github.com/elastic/app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/elastic/app-search-node/graphs/contributors)!
