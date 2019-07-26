@@ -34,10 +34,10 @@ Using this client assumes that you have already created an [App Search](https://
 - apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/api/credentials).
 
 ```javascript
-const ElasticAppSearchClient = require('@elastic/app-search-node')
+const AppSearchClient = require('@elastic/app-search-node')
 const hostIdentifier = 'host-c5s2mj'
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const client = new ElasticAppSearchClient(hostIdentifier, apiKey)
+const client = new AppSearchClient(hostIdentifier, apiKey)
 ```
 
 ### Using with App Search Managed Deploys
@@ -47,7 +47,7 @@ const client = new ElasticAppSearchClient(hostIdentifier, apiKey)
  ```javascript
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
 const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
-const client = new ElasticAppSearchClient(undefined, apiKey, baseUrlFn)
+const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 ```
 
 ### API Methods
@@ -317,6 +317,6 @@ We welcome contributors to the project. Before you begin, a couple notes...
 
 ## License 📗
 
-[Apache License 2.0](https://github.com/elastic/app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
+[Apache 2.0](https://github.com/elastic/app-search-node/blob/master/LICENSE) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/elastic/app-search-node/graphs/contributors)!
