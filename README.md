@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/elastic/app-search-node/blob/master/logo-app-search.png?raw=true" alt="Elastic App Search Logo"></p>
 
-<p align="center"><a href="https://circleci.com/gh/elastic/app-search-node"><img src="https://circleci.com/gh/elastic/app-search-node.svg?style=svg" alt="CircleCI buidl"></a>
+<p align="center"><a href="https://circleci.com/gh/elastic/app-search-node"><img src="https://circleci.com/gh/elastic/app-search-node.svg?style=svg" alt="CircleCI build"></a>
 <a href="https://github.com/elastic/app-search-node/releases"><img src="https://img.shields.io/github/release/elastic/app-search-node/all.svg?style=flat-square" alt="GitHub release" /></a></p>
 
 > A first-party Node.JS client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/cloud/app-search-service).
