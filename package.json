@@ -17,7 +17,7 @@
     "node": ">= v6.5.0"
   },
   "author": "Elastic",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/elastic/app-search-node/issues"
   },
