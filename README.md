@@ -281,16 +281,16 @@ client
 Creating a search key that will only return the title field.
 
 ```javascript
-const readOnlyApiKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
-const apiKeyName = 'search-key'
+const publicSearchKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+const publicSearchKeyName = 'search-key'
 const enforcedOptions = {
   result_fields: { title: { raw: {} } },
   filters: { world_heritage_site: 'true' }
 }
 
 const signedSearchKey = AppSearchClient.createSignedSearchKey(
-  readOnlyApiKey,
-  apiKeyName,
+  publicSearchKey,
+  publicSearchKeyName,
   enforcedOptions
 )
 
