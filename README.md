@@ -23,6 +23,18 @@ To install this package, run:
 npm install @elastic/app-search-node
 ```
 
+## Versioning
+
+This client is versioned and released alongside App Search.
+
+To guarantee compatibility, use the most recent version of this library within the major version of the
+corresponding App Search implementation.
+
+For example, for App Search `7.3`, use `7.3` of this library or above, but not
+`8.0`.
+
+If you are a [cloud](app.swiftype.com/as) user, simply use the most recent version of this library.
+
 ## Usage
 
 ### Setup: Configuring the client and authentication
