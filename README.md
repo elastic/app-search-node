@@ -276,6 +276,28 @@ client
   .catch(error => console.log(error.errorMessages))
 ```
 
+##### Create a Signed Search Key
+
+Creating a search key that will only return the title field.
+
+```javascript
+const publicSearchKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+const publicSearchKeyName = 'search-key'
+const enforcedOptions = {
+  result_fields: { title: { raw: {} } },
+  filters: { world_heritage_site: 'true' }
+}
+
+const signedSearchKey = AppSearchClient.createSignedSearchKey(
+  publicSearchKey,
+  publicSearchKeyName,
+  enforcedOptions
+)
+
+const client = new AppSearchClient('host-c5s2mj', signedSearchKey)
+client.search('sample-engine', 'everglade')
+```
+
 ## Running tests
 
 The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture responses.
