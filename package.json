@@ -1,6 +1,6 @@
 {
   "name": "@elastic/app-search-node",
-  "version": "7.3.0",
+  "version": "7.4.0",
   "description": "Elastic App Search Node.js client",
   "files": [
     "lib/"
