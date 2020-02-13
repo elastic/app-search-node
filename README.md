@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://circleci.com/gh/elastic/app-search-node"><img src="https://circleci.com/gh/elastic/app-search-node.svg?style=svg" alt="CircleCI build"></a></p>
 
-> A first-party Node.JS client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/cloud/app-search-service).
+> A first-party Node.JS client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/products/app-search).
 
 ## Contents
 
@@ -32,32 +32,38 @@ To guarantee compatibility, use the most recent version of this library within t
 
 For example, for App Search `7.3`, use `7.3` of this library or above, but not `8.0`.
 
-If you are a [SaaS](https://app.swiftype.com/as) user, simply use the most recent version of this library.
+If you are using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you should use the version 7.5.x of the client.
 
 ## Usage
 
 ### Setup: Configuring the client and authentication
 
-Using this client assumes that you have already created an [App Search](https://www.elastic.co/products/app-search) account, and subsequently created an Engine. You'll need to configure the client with the name of your Engine and your [authentication credentials](https://app.swiftype.com/as/credentials).
+Using this client assumes that you have already an instance of [Elastic App Search](https://www.elastic.co/products/app-search) up and running.
 
-- hostIdentifier -> Your **Host Identifier**, should start with `host-`
-- apiKey -> Your **API Key**. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/api/credentials).
+The client is configured using the `baseUrlFn` and `apiKey` parameters.
+
+ ```javascript
+const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
+const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
+const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
+```
+
+Note:
+
+The `[apiKey]` authenticates requests to the API.
+You can use any key type with the client, however each has a different scope.
+For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+
+#### Swiftype.com App Search users:
+
+When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `hostIdentifier` instead of the `baseUrlFn` parameter.
+The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
 
 ```javascript
 const AppSearchClient = require('@elastic/app-search-node')
 const hostIdentifier = 'host-c5s2mj'
 const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
 const client = new AppSearchClient(hostIdentifier, apiKey)
-```
-
-### Using with App Search Managed Deploys
-
- The client can be configured to use a managed deploy by using the `baseUrlFn` parameter. Since managed deploys do not rely on a `hostIdentifier`, it can be omitted.
-
- ```javascript
-const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
-const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 ```
 
 ### API Methods
