@@ -50,7 +50,7 @@ const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 
 Note:
 
-The `[api_key]` authenticates requests to the API.
+The `[apiKey]` authenticates requests to the API.
 You can use any key type with the client, however each has a different scope.
 For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
 
