@@ -21,8 +21,14 @@ const AppSearchClient = require('../lib/appSearch')
 const replay = require('replay')
 
 describe('AppSearchClient', () => {
-  const hostIdentifier = 'host-c5s2mj'
-  const apiKey = 'api-mu75psc5egt9ppzuycnc2mc3'
+  const hostIdentifier = process.env.HOST_IDENTIFIER || 'host-c5s2mj'
+  const apiKey = process.env.API_KEY || 'api-mu75psc5egt9ppzuycnc2mc3'
+  const client = new AppSearchClient(hostIdentifier, apiKey)
+
+  replay.reset('localhost') // So that replay can capture localhost requests
+  const baseUrlFn = () => "http://localhost:3002/api/as/v1/";
+  const selfManagedClient = new AppSearchClient(undefined, apiKey, baseUrlFn)
+
   const engineName = 'swiftype-api-example'
   const documents = [
     {
@@ -64,8 +70,6 @@ describe('AppSearchClient', () => {
       ]
     }
   ]
-
-  const client = new AppSearchClient(hostIdentifier, apiKey)
 
   describe('#indexDocument', () => {
     it('should index a document successfully', (done) => {
@@ -237,6 +241,21 @@ describe('AppSearchClient', () => {
         done(error)
       })
     })
+
+    it('should create an engine with a language', (done) => {
+      client.createEngine('new-engine', {language: 'en'})
+      .then((results) => {
+        assert.deepEqual({
+          'name': 'new-engine',
+          'type': 'default',
+          'language': 'en'
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
   })
 
   describe('#destroyEngine', () => {
@@ -245,6 +264,67 @@ describe('AppSearchClient', () => {
       .then((results) => {
         assert.deepEqual({
           'deleted': true
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#createMetaEngine', () => {
+    it('should create a meta engine', (done) => {
+      selfManagedClient.createMetaEngine('new-meta-engine', ['source-engine-1', 'source-engine-2'])
+      .then((results) => {
+        assert.deepEqual({
+          'name': 'new-meta-engine',
+          'type': 'meta',
+          'source_engines': [
+            'source-engine-1',
+            'source-engine-2'
+          ]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#addMetaEngineSources', () => {
+    it('should add a Source Engine to a Meta Engine', (done) => {
+      selfManagedClient.addMetaEngineSources('new-meta-engine', ['source-engine-3'])
+      .then((results) => {
+        assert.deepEqual({
+          'name': 'new-meta-engine',
+          'type': 'meta',
+          'source_engines': [
+            'source-engine-1',
+            'source-engine-2',
+            'source-engine-3'
+          ]
+        }, results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#deleteMetaEngineSources', () => {
+    it('Remove a Source Engine from a Meta Engine', (done) => {
+      selfManagedClient.deleteMetaEngineSources('new-meta-engine', ['source-engine-3'])
+      .then((results) => {
+        assert.deepEqual({
+          'name': 'new-meta-engine',
+          'type': 'meta',
+          'source_engines': [
+            'source-engine-1',
+            'source-engine-2'
+          ]
         }, results)
         done()
       })
@@ -546,5 +626,4 @@ describe('AppSearchClient', () => {
       })
     })
   })
-
 })

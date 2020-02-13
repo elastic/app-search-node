@@ -137,7 +137,7 @@ client
 const engineName = 'favorite-videos'
 
 client
-  .createEngine(engineName)
+  .createEngine(engineName, { language: 'en' })
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
@@ -309,22 +309,87 @@ const client = new AppSearchClient('host-c5s2mj', signedSearchKey)
 client.search('sample-engine', 'everglade')
 ```
 
-## Running tests
+##### Create a Meta Engine
 
-The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture responses.
+```javascript
+const engineName = 'my-meta-engine'
 
-To capture new responses, run tests with the following commands:
-
-```bash
-nvm use
-REPLAY=record npm test
+client
+  .createMetaEngine(engineName, ['source-engine-1', 'source-engine-2'])
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
 ```
 
-Otherwise:
+##### Add a Source Engine to a Meta Engine
+
+```javascript
+const engineName = 'my-meta-engine'
+
+client
+  .addMetaEngineSources(engineName, ['source-engine-3'])
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Remove a Source Engine from a Meta Engine
+
+```javascript
+const engineName = 'my-meta-engine'
+
+client
+  .deleteMetaEngineSources(engineName, ['source-engine-3'])
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Creating Engines
+
+```javascript
+const engineName = 'my-meta-engine'
+
+client
+  .createEngine(engineName, {
+    type: 'meta',
+    source_engines: ['source-engine-1', 'source-engine-2']
+  })
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+## Running tests
 
 ```bash
 npm test
 ```
+
+The specs in this project use [node-replay](https://github.com/assaf/node-replay) to capture fixtures.
+
+New fixtures should be captured from a running instance of App Search.
+
+To capture new fixtures, run a command like the following:
+
+```
+nvm use
+HOST_IDENTIFIER=host-c5s2mj API_KEY=private-b94wtaoaym2ovdk5dohj3hrz REPLAY=record npm run test -- -g 'should create a meta engine'
+```
+
+To break that down a little...
+- `HOST_IDENTIFIER` - Use this to override the fake value used in tests with an actual valid value for your App Search instance to record from
+- `API_KEY` - Use this to override the fake value used in tests with an actual valid value for your App Search instance to record from
+- `REPLAY=record` - Tells replay to record a new response if one doesn't already exist
+- `npm run test` - Run the tests
+- `-- -g 'should create a meta engine'` - Limit the tests to ONLY run the new test you've created, 'should create a meta engine' for example
+
+This will create a new fixture, make sure you manually edit that fixture to replace the host identifier and api key
+recorded in that fixture with the values the tests use.
+
+You'll also need to make sure that fixture is located in the correctly named directory under `fixtures` according to the host that was used.
+
+You'll know if something is not right because this will error when you run `npm run test` with an error like:
+```
+Error: POST https://host-c5s2mj.api.swiftype.com:443/api/as/v1/engines refused: not recording and no network access
+```
+
 
 ## FAQ 🔮
 
