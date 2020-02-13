@@ -56,7 +56,7 @@ For more information on keys, check out the [documentation](https://swiftype.com
 
 #### Swiftype.com App Search users:
 
-When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `hostIdentifier` instead of the `base_endpoint` parameter.
+When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `hostIdentifier` instead of the `baseUrlFn` parameter.
 The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
 
 ```javascript
