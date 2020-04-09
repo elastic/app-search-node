@@ -68,7 +68,7 @@ const client = new AppSearchClient(hostIdentifier, apiKey)
 
 ### API Methods
 
-##### Indexing: Creating and updating Documents
+##### Indexing: Creating or Replacing Documents
 
 ```javascript
 const engineName = 'favorite-videos'
@@ -93,6 +93,24 @@ client
   .catch(error => console.log(error))
 ```
 
+##### Indexing: Updating Documents (Partial Updates)
+
+```javascript
+const engineName = 'favorite-videos'
+const documents = [
+  {
+    id: 'INscMGmhmX4',
+    title: 'Updated title'
+  }
+]
+
+client
+  .updateDocuments(engineName, documents)
+  .then(response => console.log(response))
+  .catch(error => console.log(error))
+```
+
+
 ##### Retrieving Documents
 
 ```javascript
@@ -101,6 +119,24 @@ const documentIds = ['INscMGmhmX4', 'JNDFojsd02']
 
 client
   .getDocuments(engineName, documentIds)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Listing Documents
+
+```javascript
+const engineName = 'favorite-videos'
+
+// Without paging
+client
+  .listDocuments(engineName)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+
+// With paging
+client
+  .listDocuments(engineName, { page: { size: 10, current: 1 } })
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```

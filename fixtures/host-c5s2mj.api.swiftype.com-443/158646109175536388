@@ -1,0 +1,34 @@
+PATCH /api/as/v1/engines/swiftype-api-example/documents
+x-swiftype-client: elastic-app-search-node
+x-swiftype-client-version: 7.6.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: [{\"id\":\"INscMGmhmX4\",\"url\":\"http://www.youtube.com/watch?v=v1uyQZNg2vE\",\"title\":\"The Original Grumpy Cat\",\"body\":\"this is a test\"},{\"id\":\"JNDFojsd02\",\"url\":\"http://www.youtube.com/watch?v=tsdfhk2j\",\"title\":\"Another Grumpy Cat\",\"body\":\"this is also a test\"}]
+
+HTTP/1.1 200 OK
+date: Thu, 09 Apr 2020 19:38:11 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-swiftype-backend-region: dal
+x-swiftype-backend-datacenter: dal10
+x-swiftype-backend-node: app-api02b.dal10
+x-ratelimit-limit: 360000
+x-ratelimit-remaining: 359997
+etag: W/"1c505a964639396d60ef34105952fd98"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: ca2fd5ce01ab2f2b29dfbb8bcc3430e8
+x-runtime: 0.061411
+x-swiftype-frontend-datacenter: dal12
+x-swiftype-frontend-node: web01a.dal12
+x-swiftype-edge-datacenter: dal12
+x-swiftype-edge-node: web01a.dal12
+
+[{"id":"INscMGmhmX4","errors":[]},{"id":"JNDFojsd02","errors":[]}]

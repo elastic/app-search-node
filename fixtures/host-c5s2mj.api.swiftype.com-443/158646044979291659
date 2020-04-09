@@ -1,0 +1,34 @@
+GET /api/as/v1/engines/swiftype-api-example/documents/list
+x-swiftype-client: elastic-app-search-node
+x-swiftype-client-version: 7.6.0
+content-type: application/json
+host: host-c5s2mj.api.swiftype.com
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {}
+
+HTTP/1.1 200 OK
+date: Thu, 09 Apr 2020 19:27:29 GMT
+content-type: application/json; charset=utf-8
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding, Accept-Encoding, Origin
+status: 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-swiftype-backend-region: dal
+x-swiftype-backend-datacenter: dal10
+x-swiftype-backend-node: app-api01a.dal10
+x-ratelimit-limit: 15000
+x-ratelimit-remaining: 14998
+etag: W/"da0db5a8dc938c11da9bd83edab9628b"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: e495da5964b2e17ede42ee2f58430f54
+x-runtime: 0.042386
+x-swiftype-frontend-datacenter: dal12
+x-swiftype-frontend-node: web01a.dal12
+x-swiftype-edge-datacenter: dal12
+x-swiftype-edge-node: web01a.dal12
+
+{"meta":{"page":{"current":1,"total_pages":1,"total_results":3,"size":100}},"results":[{"body":"this is a test","id":"INscMGmhmX4","title":"The Original Grumpy Cat","url":"http://www.youtube.com/watch?v=v1uyQZNg2vE"},{"body":"this is also a test","id":"JNDFojsd02","title":"Another Grumpy Cat","url":"http://www.youtube.com/watch?v=tsdfhk2j"}]}

@@ -100,6 +100,22 @@ describe('AppSearchClient', () => {
     })
   })
 
+  describe('#updateDocuments', () => {
+    it('should update documents successfully', (done) => {
+      client.updateDocuments(engineName, documents)
+      .then((results) => {
+        assert.deepEqual([
+          { 'errors': [], 'id': 'INscMGmhmX4' },
+          { 'errors': [], 'id': 'JNDFojsd02' }
+        ], results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('#getDocuments', () => {
     const documentIds = documents.map((d) => d.id)
 
@@ -120,6 +136,32 @@ describe('AppSearchClient', () => {
             'url': 'http://www.youtube.com/watch?v=tsdfhk2j',
           }
         ], results)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#listDocuments', () => {
+    it('should list documents successfully', (done) => {
+      client.listDocuments(engineName)
+      .then((results) => {
+        assert.deepEqual([
+          {
+            'body': 'this is a test',
+            'id': 'INscMGmhmX4',
+            'title': 'The Original Grumpy Cat',
+            'url': 'http://www.youtube.com/watch?v=v1uyQZNg2vE',
+          },
+          {
+            'body': 'this is also a test',
+            'id': 'JNDFojsd02',
+            'title': 'Another Grumpy Cat',
+            'url': 'http://www.youtube.com/watch?v=tsdfhk2j',
+          }
+        ], results.results)
         done()
       })
       .catch((error) => {
