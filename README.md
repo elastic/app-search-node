@@ -52,12 +52,12 @@ Note:
 
 The `[apiKey]` authenticates requests to the API.
 You can use any key type with the client, however each has a different scope.
-For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/api/credentials).
 
 #### Swiftype.com App Search users:
 
 When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `hostIdentifier` instead of the `baseUrlFn` parameter.
-The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
+The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.com/as#/credentials) menu.
 
 ```javascript
 const AppSearchClient = require('@elastic/app-search-node')
@@ -311,7 +311,9 @@ const signedSearchKey = AppSearchClient.createSignedSearchKey(
   enforcedOptions
 )
 
-const client = new AppSearchClient('host-c5s2mj', signedSearchKey)
+const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
+const client = new AppSearchClient(undefined, signedSearchKey, baseUrlFn)
+
 client.search('sample-engine', 'everglade')
 ```
 
