@@ -1,6 +1,6 @@
 DELETE /api/as/v1/engines/new-meta-engine/source_engines
 x-swiftype-client: elastic-app-search-node
-x-swiftype-client-version: 7.6.1
+x-swiftype-client-version: 7.7.0
 content-type: application/json
 host: localhost:3002
 authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
