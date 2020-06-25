@@ -593,6 +593,44 @@ describe('AppSearchClient', () => {
     })
   })
 
+  describe('#getSchema', () => {
+    it('should get a schema successfully', (done) => {
+      selfManagedClient.getSchema(engineName)
+      .then((result) => {
+        assert.deepEqual({
+          'url': 'text',
+          'title': 'text',
+          'views': 'number',
+          'location': 'geolocation',
+          'created_date': 'date'
+        }, result)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
+  describe('#updateSchema', () => {
+    it('should update a schema successfully', (done) => {
+      selfManagedClient.updateSchema(engineName, { 'views': 'text' })
+      .then((result) => {
+        assert.deepEqual({
+          'url': 'text',
+          'title': 'text',
+          'views': 'text',
+          'location': 'geolocation',
+          'created_date': 'date'
+        }, result)
+        done()
+      })
+      .catch((error) => {
+        done(error)
+      })
+    })
+  })
+
   describe('error handling', () => {
     it('should handle 404', (done) => {
       client.search('invalid-engine-name', 'cat')
