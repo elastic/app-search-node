@@ -335,6 +335,7 @@ Creating a search key that will only return the title field.
 
 ```javascript
 const publicSearchKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+// This name must match the name of the search key above from your App Search dashboard
 const publicSearchKeyName = 'search-key'
 const enforcedOptions = {
   result_fields: { title: { raw: {} } },
