@@ -401,6 +401,30 @@ client
   .catch(error => console.log(error.errorMessages))
 ```
 
+##### Retrieving Schemas
+
+```javascript
+const engineName = 'favorite-videos'
+client
+  .getSchema(engineName)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
+##### Updating Schemas
+
+```javascript
+const engineName = 'favorite-videos'
+const schema = {
+  views: 'number',
+  created_at: 'date'
+}
+client
+  .updateSchema(engineName, schema)
+  .then(response => console.log(response))
+  .catch(error => console.log(error.errorMessages))
+```
+
 ## Running tests
 
 ```bash
