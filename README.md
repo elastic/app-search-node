@@ -350,7 +350,7 @@ const schema = {
 }
 
 client
-  .updateSchema(engineNames, schema)
+  .updateSchema(engineName, schema)
   .then(response => console.log(response))
   .catch(error => console.log(error.errorMessages))
 ```
