@@ -1,0 +1,25 @@
+POST /api/as/v1/engines/swiftype-api-example/schema
+x-swiftype-client: elastic-app-search-node
+x-swiftype-client-version: 7.10.0
+content-type: application/json
+host: localhost:3002
+authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
+accept: application/json
+body: {\"views\":\"text\"}
+
+HTTP/1.1 200 OK
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+x-app-search-version: 7.10.0
+content-type: application/json; charset=utf-8
+vary: Origin
+etag: W/"5669e9ad4cde52b649ba90479fff9e1f"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: f80545b5-9269-43e7-844d-5dae39c4c172
+x-runtime: 0.184414
+connection: close
+server: Jetty(9.2.29.v20191105)
+
+{"location":"geolocation","created_date":"date","title":"text","url":"text","views":"text"}
+
