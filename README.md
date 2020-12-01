@@ -441,7 +441,7 @@ const options = {
 
 const Client = require('@elastic/app-search-node/lib/client')
 const client = new Client('private-mu75psc5egt9ppzuycnc2mc3', 'http://localhost:3002/api/as/v1/')
-client.get(`engines/${encodeURIComponent(engineName)}/search`, options).then(console.log)
+client.post(`engines/${encodeURIComponent(engineName)}/search`, options).then(console.log)
 ```
 
 ## Running tests
