@@ -427,6 +427,23 @@ client
   .catch(error => console.log(error.errorMessages))
 ```
 
+### For App Search APIs not available in this client
+
+We try to keep this client up to date with all of the available API endpoints available from App Search.
+
+There are a few APIs that may not be available yet. For those APIs, please use the low-level client to connect to hit any App Search endpoint.
+
+```javascript
+const engineName = 'favorite-videos'
+const options = {
+  query: 'cats'
+}
+
+const Client = require('@elastic/app-search-node/lib/client')
+const client = new Client('private-mu75psc5egt9ppzuycnc2mc3', 'http://localhost:3002/api/as/v1/')
+client.post(`engines/${encodeURIComponent(engineName)}/search`, options).then(console.log)
+```
+
 ## Running tests
 
 ```bash
