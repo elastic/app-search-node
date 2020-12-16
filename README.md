@@ -93,6 +93,19 @@ client
   .catch(error => console.log(error))
 ```
 
+Note that this API will not throw on an indexing error. Errors are inlined in the response body per document:
+
+```json
+[
+  { "id": "park_rocky-mountain", "errors": [] },
+  {
+    "id": "park_saguaro",
+    "errors": ["Invalid field value: Value 'foo' cannot be parsed as a float"]
+  }
+]
+
+```
+
 ##### Indexing: Updating Documents (Partial Updates)
 
 ```javascript
