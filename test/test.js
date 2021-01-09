@@ -401,8 +401,8 @@ describe('AppSearchClient', () => {
         query: 'grumpy',
         options: {}
       }])
-        .then((resp) => {
-          assert.deepEqual(resp.map(res => res.results.map(res => res.title.raw)), [[
+        .then((response) => {
+          assert.deepEqual(response.map(resp => resp.results.map(res => res.title.raw)), [[
               'The Original Grumpy Cat',
               'Another Grumpy Cat'
             ], [
