@@ -1,6 +1,6 @@
 POST /api/as/v1/engines/new-meta-engine/source_engines
 x-swiftype-client: elastic-app-search-node
-x-swiftype-client-version: 7.12.0
+x-swiftype-client-version: 7.13.0
 content-type: application/json
 host: localhost:3002
 authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
@@ -11,7 +11,7 @@ HTTP/1.1 200 OK
 x-frame-options: SAMEORIGIN
 x-xss-protection: 1; mode=block
 x-content-type-options: nosniff
-x-app-search-version: 7.12.0
+x-app-search-version: 7.13.0
 content-type: application/json; charset=utf-8
 vary: Origin
 etag: W/"3d866b390e18c1bf51503b81707dc011"
