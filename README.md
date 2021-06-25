@@ -381,10 +381,16 @@ const enforcedOptions = {
   filters: { world_heritage_site: 'true' }
 }
 
+// Optional. See https://github.com/auth0/node-jsonwebtoken#usage for all options
+const signOptions = {
+  expiresIn: '5 minutes'
+}
+
 const signedSearchKey = AppSearchClient.createSignedSearchKey(
   publicSearchKey,
   publicSearchKeyName,
-  enforcedOptions
+  enforcedOptions,
+  signOptions
 )
 
 const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
