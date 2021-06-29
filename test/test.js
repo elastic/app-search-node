@@ -464,6 +464,13 @@ describe('AppSearchClient', () => {
       assert.equal(decoded.query, 'cat')
       done()
     })
+    it('should pass sign options to node-jsonwebtoken', (done) => {
+      token = AppSearchClient.createSignedSearchKey('private-mu75psc5egt9ppzuycnc2mc3', 'my-token-name', { query: 'cat' }, { expiresIn: '5 minutes' })
+      jwt = require('jsonwebtoken')
+      decoded = jwt.verify(token, 'private-mu75psc5egt9ppzuycnc2mc3')
+      assert.ok(decoded.exp)
+      done()
+    })
   })
 
   describe('#listCurations', () => {
