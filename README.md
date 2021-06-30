@@ -370,12 +370,12 @@ client
 
 ##### Create a Signed Search Key
 
-Creating a search key that will only return the title field.
+Creating a signed search key that will only return the title field. Note: choose a private key with read access enabled to sign the Signed Search Key.
 
 ```javascript
-const publicSearchKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+const readAccessPrivateKey = 'private-xxxxxxxxxxxxxxxxxxxxxxxx'
 // This name must match the name of the key above from your App Search dashboard
-const publicSearchKeyName = 'search-key'
+const readAccessPrivateKeyName = 'private-key'
 const enforcedOptions = {
   result_fields: { title: { raw: {} } },
   filters: { world_heritage_site: 'true' }
@@ -387,8 +387,8 @@ const signOptions = {
 }
 
 const signedSearchKey = AppSearchClient.createSignedSearchKey(
-  publicSearchKey,
-  publicSearchKeyName,
+  readAccessPrivateKey,
+  readAccessPrivateKeyName,
   enforcedOptions,
   signOptions
 )
