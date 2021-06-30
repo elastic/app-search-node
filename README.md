@@ -370,7 +370,9 @@ client
 
 ##### Create a Signed Search Key
 
-Creating a signed search key that will only return the title field. Note: choose a private key with read access enabled to sign the Signed Search Key.
+Signed search keys keep your read-only Private API Keys secret and restrict what a user can search over. They can be used to restrict top-level search options. The example below creates a signed search key that will only return the `title` field.
+
+See https://www.elastic.co/guide/en/app-search/current/authentication.html#authentication-signed for more options and documentation.
 
 ```javascript
 const readAccessPrivateKey = 'private-xxxxxxxxxxxxxxxxxxxxxxxx'
