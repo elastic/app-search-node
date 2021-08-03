@@ -1,6 +1,6 @@
 GET /api/as/v1/engines/swiftype-api-example/search
 x-swiftype-client: elastic-app-search-node
-x-swiftype-client-version: 7.13.1
+x-swiftype-client-version: 7.14.0
 content-type: application/json
 host: host-c5s2mj.api.swiftype.com
 authorization: Bearer invalid
