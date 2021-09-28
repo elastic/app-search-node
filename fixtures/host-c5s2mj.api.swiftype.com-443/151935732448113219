@@ -2,7 +2,7 @@ GET /api/as/v1/engines/swiftype-api-example/documents
 content-type: application/json
 host: host-c5s2mj.api.swiftype.com
 x-swiftype-client: elastic-app-search-node
-x-swiftype-client-version: 7.14.0
+x-swiftype-client-version: 7.15.0
 authorization: Bearer api-mu75psc5egt9ppzuycnc2mc3
 accept: application/json
 body: [\"INscMGmhmX4\",\"JNDFojsd02\"]
