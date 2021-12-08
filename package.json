@@ -6,6 +6,7 @@
     "lib/"
   ],
   "main": "lib/appSearch.js",
+  "types": "app-search-node.d.ts",
   "scripts": {
     "test": "mocha"
   },
