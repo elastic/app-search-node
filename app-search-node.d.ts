@@ -1,5 +1,3 @@
-
-
 declare module "@elastic/app-search-node" {
   export = AppSearchClient;
 
@@ -46,6 +44,8 @@ declare module "@elastic/app-search-node" {
     );
 
     /**
+     * Submit a search and receive a set of results with meta data
+     * 
      * `options` are documented [here](https://www.elastic.co/guide/en/app-search/current/search.html)
      *
      * @example
@@ -58,16 +58,47 @@ declare module "@elastic/app-search-node" {
      * };
      *
      * try {
-     *   const response = await client.search('national-parks', '')
-     *   console.log(response.results)
+     *   const response = await client.search(engineName, query);
+     *   console.log(response.results);
      * } catch (e) {
-     *   console.error(e)
+     *   console.error(e);
      * }
      */
     search(
       engineName: string,
       query: string,
       options?: Record<string, any>
-    ): AppSearchClient.SearchResponse;
+    ): Promise<AppSearchClient.SearchResponse>;
+
+    /**
+     * Run multiple searches for documents on a single request
+     * 
+     * `options` are documented [here](https://www.elastic.co/guide/en/app-search/current/multi-search.html)
+     *
+     * @example
+     *
+     * const engineName = "favorite-videos";
+     * const searches = [
+     *   {
+     *     query: "cat",
+     *     options: {
+     *       search_fields: { title: {} },
+     *       result_fields: { title: { raw: {} } },
+     *     },
+     *   },
+     *   { query: "grumpy" },
+     * ];
+     *
+     * try {
+     *   const responses = await client.multiSearch(engineName, query);
+     *   console.log(responses);
+     * } catch (e) {
+     *   console.error(e)
+     * }
+     */
+    multiSearch(
+      engineName: string,
+      searches: { query: string; options?: Record<string, any> }[]
+    ): Promise<AppSearchClient.SearchResponse[]>;
   }
 }
