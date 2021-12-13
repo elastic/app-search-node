@@ -2,10 +2,13 @@ declare module "@elastic/app-search-node" {
   export = AppSearchClient;
 
   namespace AppSearchClient {
-
     export interface DocumentResponse {
       id: string;
       errors: string[];
+    }
+
+    export interface SingleDocumentResponse {
+      id: string;
     }
     export interface Paging {
       total_pages: number;
@@ -50,6 +53,12 @@ declare module "@elastic/app-search-node" {
 
     export interface DeleteResponse {
       deleted: boolean;
+    }
+
+    export interface DocumentDeleteResponse {
+      deleted: boolean;
+      result: boolean;
+      id: string;
     }
   }
 
@@ -148,67 +157,225 @@ declare module "@elastic/app-search-node" {
      * Create or update a single document
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
+     * 
+     * @example
+     * 
+     * const engineName = "favorite-videos";
+     * const document = {
+     *   id: "INscMGmhmX4",
+     *   url: "https://www.youtube.com/watch?v=INscMGmhmX4",
+     *   title: "The Original Grumpy Cat",
+     *   body: "A wonderful video of a magnificent cat.",
+     * };
+     * 
+     * try {
+     *   const singleDocumentResponse = await client.indexDocument(engineName, document);
+     *   console.log(`Indexed ${singleDocumentResponse.id} succesfully`);
+     * } catch (e) {
+     *   console.log(e);
+     * }
+
      */
-    indexDocument(engineName: string, document: Record<string, any>): Promise<DocumentResponse[]>;
+    indexDocument(
+      engineName: string,
+      document: Record<string, any>
+    ): Promise<AppSearchClient.SingleDocumentResponse>;
 
     /**
      * Create or update documents
+     *
+     * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
+     *
+     * @example
+     *
+     * const engineName = "favorite-videos";
+     * const documents = [
+     *   {
+     *     id: "INscMGmhmX4",
+     *     url: "https://www.youtube.com/watch?v=INscMGmhmX4",
+     *     title: "The Original Grumpy Cat",
+     *     body: "A wonderful video of a magnificent cat.",
+     *   },
+     *   {
+     *     id: "JNDFojsd02",
+     *     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+     *     title: "Another Grumpy Cat",
+     *     body: "A great video of another cool cat.",
+     *   },
+     * ];
+     *
+     * try {
+     *   const documentResponses = await client.indexDocuments(engineName, document);
+     *   const succesfullyIndexedDocumentIds = documentResponses
+     *     .filter((documentResponse) => documentResponse.errors.length === 0)
+     *     .map((documentResponse) => documentResponse.id)
+     *     .join(", ");
+     *   console.log(
+     *     `Documents indexed successfully: ${succesfullyIndexedDocumentIds}`
+     *   );
+     *
+     *   const failures = documentResponses.filter(
+     *     (documentResponse) => documentResponse.errors.length > 0
+     *   );
+     *   if (failures.length > 0) {
+     *     console.log(
+     *       `Other documents failed with errors: ${failures
+     *         .map((documentResponse) => documentResponse.errors)
+     *         .join(", ")}`
+     *     );
+     *   }
+     * } catch (e) {
+     *   console.log(e);
+     * }
      */
-    indexDocuments(engineName: string, documents: Record<string, any>[]): void;
+    indexDocuments(
+      engineName: string,
+      documents: Record<string, any>[]
+    ): Promise<AppSearchClient.DocumentResponse[]>;
 
     /**
      * Update specific document fields by id and field
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
+     *
+     * @example
+     * const engineName = "favorite-videos";
+     * const documents = [
+     *   {
+     *     id: "INscMGmhmX4",
+     *     title: "Updated title",
+     *   },
+     *   {
+     *     id: "JNDFojsd02",
+     *     title: "Updated title",
+     *   },
+     * ];
+     *
+     * try {
+     *   const documentResponses = await client.updateDocuments(engineName, document);
+     *   const succesfullyIndexedDocumentIds = documentResponses
+     *     .filter((documentResponse) => documentResponse.errors.length === 0)
+     *     .map((documentResponse) => documentResponse.id)
+     *     .join(", ");
+     *   console.log(
+     *     `Documents updated successfully: ${succesfullyIndexedDocumentIds}`
+     *   );
+     *
+     *   const failures = documentResponses.filter(
+     *     (documentResponse) => documentResponse.errors.length > 0
+     *   );
+     *   if (failures.length > 0) {
+     *     console.log(
+     *       `Other documents failed with errors: ${failures
+     *         .map((documentResponse) => documentResponse.errors)
+     *         .join(", ")}`
+     *     );
+     *   }
+     * } catch (e) {
+     *   console.log(e);
+     * }
      */
-    updateDocuments(engineName: string, documents: Record<string, any>[]): void;
+    updateDocuments(
+      engineName: string,
+      documents: Record<string, any>[]
+    ): Promise<AppSearchClient.DocumentResponse[]>;
 
     /**
      * Lists up to 10,000 documents
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-list
+     *
+     * @example
+     *
+     * const engineName = "favorite-videos";
+     *
+     * try {
+     *   const documentList = await client.listDocuments(engineName, {
+     *     page: { size: 10, current: 1 },
+     *   });
+     *   documentList.results.forEach((r) => console.log(r));
+     * } catch (e) {
+     *   console.error(e);
+     * }
      */
-    listDocuments(engineName: string, options?: Record<string, any>): void;
+    listDocuments(
+      engineName: string,
+      options?: Record<string, any>
+    ): Promise<AppSearchClient.PagedResponse>;
 
     /**
      * Retrieves one or more documents by id
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-get
+     *
+     * @example
+     *
+     * const engineName = "favorite-videos";
+     * const documentIds = ["INscMGmhmX4", "JNDFojsd02"];
+     *
+     * try {
+     *   const documents = await client.getDocuments(engineName, documentIds);
+     *   // documents that are not found return as null
+     *   console.log(documents.filter((document) => document !== null));
+     * } catch (e) {
+     *   console.error(e);
+     * }
      */
-    getDocuments(engineName: string, ids: string[]): void;
+    getDocuments(
+      engineName: string,
+      ids: string[]
+    ): Promise<Array<Record<string, any> | null>>;
 
     /**
      * Deletes documents for given Document IDs
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-delete
+     *
+     * @example
+     *
+     * const engineName = "favorite-videos";
+     * const documentIds = ["INscMGmhmX4", "JNDFojsd02"];
+     *
+     * try {
+     *   const response = await client.destroyDocuments(engineName, documentIds);
+     *   const deltedIds = response.filter((r) => r.deleted === true).map((r) => r.id);
+     *   console.log(`Deleted documents ${deltedIds.join(", ")}`);
+     * } catch (e) {
+     *   console.error(e);
+     * }
      */
-    destroyDocuments(engineName: string, ids: string[]): void;
+    destroyDocuments(
+      engineName: string,
+      ids: string[]
+    ): Promise<AppSearchClient.DocumentDeleteResponse[]>;
 
     /**
      * Retrieves all engines with optional pagination support
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-list
-     * 
+     *
      * @example
-     * 
+     *
      * try {
      *   const engines = await client.listEngines({ page: { size: 10, current: 1 } });
-     *   console.log(engines);
+     *   engines.results.forEach(r => console.log(r));
      * } catch (e) {
      *   console.error(e);
      * }
      */
-    listEngines(options?: Record<string, any>): Promise<AppSearchClient.PagedResponse>;
+    listEngines(
+      options?: Record<string, any>
+    ): Promise<AppSearchClient.PagedResponse>;
 
     /**
      * Retrieves details of a given engine by its name
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-get
-     * 
+     *
      * @example
-     * 
+     *
      * const engineName = "favorite-videos";
-     * 
+     *
      * try {
      *   const engine = await client.getEngine(engineName);
      *   console.log(engine);
@@ -222,11 +389,11 @@ declare module "@elastic/app-search-node" {
      * Creates an App Search Engine
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-create
-     * 
+     *
      * @example
-     * 
+     *
      * const engineName = "favorite-videos";
-     * 
+     *
      * try {
      *   const engine = await client.createEngine(engineName, { language: "en" });
      *   console.log(engine);
@@ -234,17 +401,20 @@ declare module "@elastic/app-search-node" {
      *   console.error(e);
      * }
      */
-    createEngine(engineName: string, options?: Record<string, any>): Promise<Record<string, any>>;
+    createEngine(
+      engineName: string,
+      options?: Record<string, any>
+    ): Promise<Record<string, any>>;
 
     /**
      * Deletes a source engine from a given meta engine
      *
      * https://www.elastic.co/guide/en/app-search/current/meta-engines.html#meta-engines-remove-source-engines
-     * 
+     *
      * @example
-     * 
+     *
      * const engineName = "favorite-videos";
-     * 
+     *
      * try {
      *   const response = await client.destroyEngine(engineName);
      *   console.log(response);
@@ -252,22 +422,22 @@ declare module "@elastic/app-search-node" {
      *   console.error(e);
      * }
      */
-    destroyEngine(engineName: string): Promise<DeleteResponse>;
+    destroyEngine(engineName: string): Promise<AppSearchClient.DeleteResponse>;
 
     /**
      * Retrieve available curations for the given engine
-     * 
+     *
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-read
-     * 
+     *
      * @example
-     * 
+     *
      * const engineName = "favorite-videos";
-     * 
+     *
      * try {
      *   const curationsList = await client.listCurations(engineName, {
      *     page: { size: 10, current: 1 },
      *   });
-     *   curationsList.results.forEach(console.log);
+     *   curationsList.results.forEach(r => console.log(r));
      * } catch (e) {
      *   console.error(e);
      * }
