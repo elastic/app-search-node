@@ -174,7 +174,6 @@ declare module "@elastic/app-search-node" {
      * } catch (e) {
      *   console.log(e);
      * }
-
      */
     indexDocument(
       engineName: string,
@@ -499,6 +498,8 @@ declare module "@elastic/app-search-node" {
      * Updates an existing curation 
      * 
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-update
+     * 
+     * @example
      * 
      * const engineName = "favorite-videos";
      * const curationId = "cur-7438290";

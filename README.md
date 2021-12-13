@@ -43,9 +43,9 @@ Using this client assumes that you have already an instance of [Elastic App Sear
 The client is configured using the `baseUrlFn` and `apiKey` parameters.
 
  ```javascript
-const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
-const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
+const apiKey = "private-mu75psc5egt9ppzuycnc2mc3";
+const baseUrlFn = () => "http://localhost:3002/api/as/v1/";
+const client = new AppSearchClient(undefined, apiKey, baseUrlFn);
 ```
 
 Note:
@@ -61,9 +61,9 @@ The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.
 
 ```javascript
 const AppSearchClient = require('@elastic/app-search-node')
-const hostIdentifier = 'host-c5s2mj'
-const apiKey = 'private-mu75psc5egt9ppzuycnc2mc3'
-const client = new AppSearchClient(hostIdentifier, apiKey)
+const hostIdentifier = "host-c5s2mj";
+const apiKey = "private-mu75psc5egt9ppzuycnc2mc3";
+const client = new AppSearchClient(hostIdentifier, apiKey);
 ```
 
 ### API Methods
@@ -71,26 +71,45 @@ const client = new AppSearchClient(hostIdentifier, apiKey)
 ##### Indexing: Creating or Replacing Documents
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 const documents = [
   {
-    id: 'INscMGmhmX4',
-    url: 'https://www.youtube.com/watch?v=INscMGmhmX4',
-    title: 'The Original Grumpy Cat',
-    body: 'A wonderful video of a magnificent cat.'
+    id: "INscMGmhmX4",
+    url: "https://www.youtube.com/watch?v=INscMGmhmX4",
+    title: "The Original Grumpy Cat",
+    body: "A wonderful video of a magnificent cat.",
   },
   {
-    id: 'JNDFojsd02',
-    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    title: 'Another Grumpy Cat',
-    body: 'A great video of another cool cat.'
-  }
-]
+    id: "JNDFojsd02",
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    title: "Another Grumpy Cat",
+    body: "A great video of another cool cat.",
+  },
+];
 
-client
-  .indexDocuments(engineName, documents)
-  .then(response => console.log(response))
-  .catch(error => console.log(error))
+try {
+  const documentResponses = await client.indexDocuments(engineName, document);
+  const succesfullyIndexedDocumentIds = documentResponses
+    .filter((documentResponse) => documentResponse.errors.length === 0)
+    .map((documentResponse) => documentResponse.id)
+    .join(", ");
+  console.log(
+    `Documents indexed successfully: ${succesfullyIndexedDocumentIds}`
+  );
+
+  const failures = documentResponses.filter(
+    (documentResponse) => documentResponse.errors.length > 0
+  );
+  if (failures.length > 0) {
+    console.log(
+      `Other documents failed with errors: ${failures
+        .map((documentResponse) => documentResponse.errors)
+        .join(", ")}`
+    );
+  }
+} catch (e) {
+  console.log(e);
+}
 ```
 
 Note that this API will not throw on an indexing error. Errors are inlined in the response body per document:
@@ -109,263 +128,312 @@ Note that this API will not throw on an indexing error. Errors are inlined in th
 ##### Indexing: Updating Documents (Partial Updates)
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 const documents = [
   {
-    id: 'INscMGmhmX4',
-    title: 'Updated title'
-  }
-]
+    id: "INscMGmhmX4",
+    title: "Updated title",
+  },
+  {
+    id: "JNDFojsd02",
+    title: "Updated title",
+  },
+];
 
-client
-  .updateDocuments(engineName, documents)
-  .then(response => console.log(response))
-  .catch(error => console.log(error))
+try {
+  const documentResponses = await client.updateDocuments(engineName, document);
+  const succesfullyIndexedDocumentIds = documentResponses
+    .filter((documentResponse) => documentResponse.errors.length === 0)
+    .map((documentResponse) => documentResponse.id)
+    .join(", ");
+  console.log(
+    `Documents updated successfully: ${succesfullyIndexedDocumentIds}`
+  );
+
+  const failures = documentResponses.filter(
+    (documentResponse) => documentResponse.errors.length > 0
+  );
+  if (failures.length > 0) {
+    console.log(
+      `Other documents failed with errors: ${failures
+        .map((documentResponse) => documentResponse.errors)
+        .join(", ")}`
+    );
+  }
+} catch (e) {
+  console.log(e);
+}
 ```
 
 
 ##### Retrieving Documents
 
 ```javascript
-const engineName = 'favorite-videos'
-const documentIds = ['INscMGmhmX4', 'JNDFojsd02']
+const engineName = "favorite-videos";
+const documentIds = ["INscMGmhmX4", "JNDFojsd02"];
 
-client
-  .getDocuments(engineName, documentIds)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const documents = await client.getDocuments(engineName, documentIds);
+  // documents that are not found return as null
+  console.log(documents.filter((document) => document !== null));
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Listing Documents
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
+const documentIds = ["INscMGmhmX4", "JNDFojsd02"];
 
-// Without paging
-client
-  .listDocuments(engineName)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
-
-// With paging
-client
-  .listDocuments(engineName, { page: { size: 10, current: 1 } })
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const documents = await client.getDocuments(engineName, documentIds);
+  // documents that are not found return as null
+  console.log(documents.filter((document) => document !== null));
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Destroying Documents
 
 ```javascript
-const engineName = 'favorite-videos'
-const documentIds = ['INscMGmhmX4', 'JNDFojsd02']
+const engineName = "favorite-videos";
+const documentIds = ["INscMGmhmX4", "JNDFojsd02"];
 
-client
-  .destroyDocuments(engineName, documentIds)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const response = await client.destroyDocuments(engineName, documentIds);
+  const deltedIds = response.filter((r) => r.deleted === true).map((r) => r.id);
+  console.log(`Deleted documents ${deltedIds.join(", ")}`);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Listing Engines
 
 ```javascript
-client
-  .listEngines({ page: { size: 10, current: 1 } })
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engines = await client.listEngines({ page: { size: 10, current: 1 } });
+  engines.results.forEach((r) => console.log(r));
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Retrieving Engines
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 
-client
-  .getEngine(engineName)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.getEngine(engineName);
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Creating Engines
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 
-client
-  .createEngine(engineName, { language: 'en' })
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.createEngine(engineName, { language: "en" });
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Destroying Engines
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 
-client
-  .destroyEngine(engineName)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const response = await client.destroyEngine(engineName);
+  console.log(response);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Searching
 
 ```javascript
-const engineName = 'favorite-videos'
-const query = 'cat'
-const searchFields = { title: {} }
-const resultFields = { title: { raw: {} } }
-const options = { search_fields: searchFields, result_fields: resultFields }
+const engineName = "favorite-videos";
+const query = "cat";
+const options = {
+  search_fields: { title: {} },
+  result_fields: { title: { raw: {} } },
+};
 
-client
-  .search(engineName, query, options)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const response = await client.search(engineName, query);
+  console.log(response.results);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Multi-Search
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 const searches = [
-  { query: 'cat', options: {
+  {
+    query: "cat",
+    options: {
       search_fields: { title: {} },
-      result_fields: { title: { raw: {} } }
-  } },
-  { query: 'grumpy', options: {} }
-]
+      result_fields: { title: { raw: {} } },
+    },
+  },
+  { query: "grumpy" },
+];
 
-client
-  .multiSearch(engineName, searches)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const responses = await client.multiSearch(engineName, query);
+  console.log(responses);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Query Suggestion
 
 ```javascript
-const engineName = 'favorite-videos'
-const options = {
-  size: 3,
-  types: {
-    documents: {
-      fields: ['title']
-    }
-  }
-}
+const engineName = "favorite-videos";
+const document = {
+  id: "INscMGmhmX4",
+  url: "https://www.youtube.com/watch?v=INscMGmhmX4",
+  title: "The Original Grumpy Cat",
+  body: "A wonderful video of a magnificent cat.",
+};
 
-client
-  .querySuggestion(engineName, 'cat', options)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const singleDocumentResponse = await client.indexDocument(
+    engineName,
+    document
+  );
+  console.log(`Indexed ${singleDocumentResponse.id} succesfully`);
+} catch (e) {
+  console.log(e);
+}
 ```
 
 ##### Listing Curations
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 
-client
-  .listCurations(engineName)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
-
-// Pagination details are optional
-const paginationDetails = {
-        page: {
-          current: 2,
-          size: 10
-        }
-      }
-
-client
-  .listCurations(engineName, paginationDetails)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const curationsList = await client.listCurations(engineName, {
+    page: { size: 10, current: 1 },
+  });
+  curationsList.results.forEach((r) => console.log(r));
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Retrieving Curations
 
 ```javascript
-const engineName = 'favorite-videos'
-const curationId = 'cur-7438290'
+const engineName = "favorite-videos";
+const curationId = "cur-7438290";
 
-client
-  .getCuration(engineName, curationId)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const curation = await client.getCuration(engineName, curationId);
+  console.log(curation);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Creating Curations
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 const newCuration = {
-  queries: ['cat blop'],
-  promoted: ['Jdas78932'],
-  hidden: ['INscMGmhmX4', 'JNDFojsd02']
-}
+  queries: ["cat blop"],
+  promoted: ["Jdas78932"],
+};
 
-client
-  .createCuration(engineName, newCuration)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const curation = await client.createCuration(engineName, newCuration);
+  console.log(curation);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Updating Curations
 
 ```javascript
-const engineName = 'favorite-videos'
-const curationId = 'cur-7438290'
-// "queries" is required, either "promoted" or "hidden" is required.
-// Values sent for all fields will overwrite existing values.
+const engineName = "favorite-videos";
+const curationId = "cur-7438290";
 const newDetails = {
-  queries: ['cat blop'],
-  promoted: ['Jdas78932', 'JFayf782']
-}
+  queries: ["cat blop"],
+  promoted: ["Jdas78932", "JFayf782"],
+};
 
-client
-  .updateCuration(engineName, curationId, newDetails)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const curation = await client.updateCuration(
+    engineName,
+    curationId,
+    newDetails
+  );
+  console.log(curation);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Deleting Curations
 
 ```javascript
-const engineName = 'favorite-videos'
-const curationId = 'cur-7438290'
+const engineName = "favorite-videos";
+const curationId = "cur-7438290";
 
-client
-  .destroyCuration(engineName, curationId)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const response = await client.destroyCuration(engineName, curationId);
+  console.log(response.deleted);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Retrieving Schemas
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 
-client
-  .getSchema(engineName)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const schema = await client.getSchema(engineName);
+  console.log(schema);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Updating Schemas
 
 ```javascript
-const engineName = 'favorite-videos'
+const engineName = "favorite-videos";
 const schema = {
-  views: 'number',
-  created_at: 'date'
-}
+  views: "number",
+  created_at: "date",
+};
 
-client
-  .updateSchema(engineName, schema)
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const updatedSchema = await client.updateSchema(engineName, schema);
+  console.log(updatedSchema);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Create a Signed Search Key
@@ -373,77 +441,89 @@ client
 Creating a search key that will only return the title field.
 
 ```javascript
-const publicSearchKey = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+const publicSearchKey = "search-xxxxxxxxxxxxxxxxxxxxxxxx";
 // This name must match the name of the key above from your App Search dashboard
-const publicSearchKeyName = 'search-key'
+const publicSearchKeyName = "search-key";
 const enforcedOptions = {
   result_fields: { title: { raw: {} } },
-  filters: { world_heritage_site: 'true' }
-}
+  filters: { world_heritage_site: "true" },
+};
 
 // Optional. See https://github.com/auth0/node-jsonwebtoken#usage for all options
 const signOptions = {
-  expiresIn: '5 minutes'
-}
+  expiresIn: "5 minutes",
+};
 
 const signedSearchKey = AppSearchClient.createSignedSearchKey(
   publicSearchKey,
   publicSearchKeyName,
   enforcedOptions,
   signOptions
-)
+);
 
-const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
-const client = new AppSearchClient(undefined, signedSearchKey, baseUrlFn)
+const baseUrlFn = () => "http://localhost:3002/api/as/v1/";
+const client = new AppSearchClient(undefined, signedSearchKey, baseUrlFn);
 
-client.search('sample-engine', 'everglade')
+client.search("sample-engine", "everglade");
 ```
 
 ##### Create a Meta Engine
 
 ```javascript
-const engineName = 'my-meta-engine'
+const engineName = "my-meta-engine";
 
-client
-  .createMetaEngine(engineName, ['source-engine-1', 'source-engine-2'])
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.createMetaEngine(engineName, [
+    "source-engine-1",
+    "source-engine-2",
+  ]);
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Add a Source Engine to a Meta Engine
 
 ```javascript
-const engineName = 'my-meta-engine'
+const engineName = "my-meta-engine";
 
-client
-  .addMetaEngineSources(engineName, ['source-engine-3'])
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.addMetaEngineSources(engineName, [
+    "source-engine-3",
+  ]);
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Remove a Source Engine from a Meta Engine
 
 ```javascript
-const engineName = 'my-meta-engine'
+const engineName = "my-meta-engine";
 
-client
-  .deleteMetaEngineSources(engineName, ['source-engine-3'])
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.deleteMetaEngineSources(engineName, [
+    "source-engine-3",
+  ]);
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ##### Creating Engines
 
 ```javascript
-const engineName = 'my-meta-engine'
+const engineName = "favorite-videos";
 
-client
-  .createEngine(engineName, {
-    type: 'meta',
-    source_engines: ['source-engine-1', 'source-engine-2']
-  })
-  .then(response => console.log(response))
-  .catch(error => console.log(error.errorMessages))
+try {
+  const engine = await client.createEngine(engineName, { language: "en" });
+  console.log(engine);
+} catch (e) {
+  console.error(e);
+}
 ```
 
 ### For App Search APIs not available in this client
