@@ -108,7 +108,7 @@ try {
     );
   }
 } catch (e) {
-  console.log(e);
+  console.error(e);
 }
 ```
 
@@ -161,7 +161,7 @@ try {
     );
   }
 } catch (e) {
-  console.log(e);
+  console.error(e);
 }
 ```
 
@@ -320,7 +320,7 @@ try {
   );
   console.log(`Indexed ${singleDocumentResponse.id} succesfully`);
 } catch (e) {
-  console.log(e);
+  console.error(e);
 }
 ```
 

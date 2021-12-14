@@ -172,7 +172,7 @@ declare module "@elastic/app-search-node" {
      *   const singleDocumentResponse = await client.indexDocument(engineName, document);
      *   console.log(`Indexed ${singleDocumentResponse.id} succesfully`);
      * } catch (e) {
-     *   console.log(e);
+     *   console.error(e);
      * }
      */
     indexDocument(
@@ -224,7 +224,7 @@ declare module "@elastic/app-search-node" {
      *     );
      *   }
      * } catch (e) {
-     *   console.log(e);
+     *   console.error(e);
      * }
      */
     indexDocuments(
@@ -271,7 +271,7 @@ declare module "@elastic/app-search-node" {
      *     );
      *   }
      * } catch (e) {
-     *   console.log(e);
+     *   console.error(e);
      * }
      */
     updateDocuments(
