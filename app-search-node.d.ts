@@ -87,6 +87,10 @@ declare module "@elastic/app-search-node" {
      *
      * `options` are documented [here](https://www.elastic.co/guide/en/app-search/current/search.html)
      *
+     * @param engineName unique Engine name
+     * @param query String that is used to perform a search request.
+     * @param options See elastic.co documentation for supported options.
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -102,7 +106,9 @@ declare module "@elastic/app-search-node" {
      * } catch (e) {
      *   console.error(e);
      * }
+     * 
      */
+    
     search(
       engineName: string,
       query: string,
@@ -112,8 +118,11 @@ declare module "@elastic/app-search-node" {
     /**
      * Run multiple searches for documents on a single request
      *
-     * `options` are documented [here](https://www.elastic.co/guide/en/app-search/current/multi-search.html)
-     *
+     * https://www.elastic.co/guide/en/app-search/current/multi-search.html
+     * 
+     * @param engineName unique Engine name
+     * @param searches Searches to execute
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -145,7 +154,28 @@ declare module "@elastic/app-search-node" {
      *
      * `options` are documented [here](https://www.elastic.co/guide/en/app-search/current/query-suggestion.html)
      *
-     *
+     * @param engineName unique Engine name
+     * @param query String that is used to perform a query suggestion request.
+     * @param options See elastic.co documentation for supported options.
+     * 
+     * @example
+     * 
+     * const engineName = "favorite-videos";
+     * const document = {
+     *   id: "INscMGmhmX4",
+     *   url: "https://www.youtube.com/watch?v=INscMGmhmX4",
+     *   title: "The Original Grumpy Cat",
+     *   body: "A wonderful video of a magnificent cat.",
+     * };
+     * try {
+     *   const singleDocumentResponse = await client.indexDocument(
+     *     engineName,
+     *     document
+     *   );
+     *   console.log(`Indexed ${singleDocumentResponse.id} succesfully`);
+     * } catch (e) {
+     *   console.error(e);
+     * }
      */
     querySuggestion(
       engineName: string,
@@ -157,6 +187,9 @@ declare module "@elastic/app-search-node" {
      * Create or update a single document
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
+     * 
+     * @param engineName unique Engine name
+     * @param document document object to be indexed.
      * 
      * @example
      * 
@@ -185,6 +218,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
      *
+     * @param engineName unique Engine name
+     * @param documents Array of document objects to be indexed.
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -237,7 +273,11 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-create
      *
+     * @param engineName unique Engine name
+     * @param documents Array of document objects to be updated.
+     * 
      * @example
+     * 
      * const engineName = "favorite-videos";
      * const documents = [
      *   {
@@ -284,6 +324,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-list
      *
+     * @param engineName unique Engine name
+     * @param options See elastic.co documentation for supported options.
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -307,6 +350,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-get
      *
+     * @param engineName unique Engine name
+     * @param ids Array of document ids to be retrieved
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -330,6 +376,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/documents.html#documents-delete
      *
+     * @param {String} engineName unique Engine name
+     * @param {Array<String>} ids Array of document ids to be destroyed
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -353,6 +402,8 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-list
      *
+     * @param options See elastic.co documentation for supported options.
+     * 
      * @example
      *
      * try {
@@ -371,6 +422,8 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-get
      *
+     * @param engineName unique Engine name
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -389,6 +442,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/engines.html#engines-create
      *
+     * @param engineName unique Engine name
+     * @param options See elastic.co documentation for supported options.
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -410,6 +466,8 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/meta-engines.html#meta-engines-remove-source-engines
      *
+     * @param engineName unique Engine name
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -428,6 +486,8 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-read
      *
+     * @param engineName unique Engine name
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -451,6 +511,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-read
      *
+     * @param engineName unique Engine name
+     * @param curationId unique Curation id
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -473,6 +536,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-create
      *
+     * @param engineName unique Engine name
+     * @param newCuration body of the Curation object
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -498,6 +564,10 @@ declare module "@elastic/app-search-node" {
      * Updates an existing curation 
      * 
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-update
+     * 
+     * @param engineName unique Engine name
+     * @param curationId unique Curation id
+     * @param newCuration body of the Curation object
      * 
      * @example
      * 
@@ -529,6 +599,9 @@ declare module "@elastic/app-search-node" {
      * Deletes a curation set by ID
      *
      * https://www.elastic.co/guide/en/app-search/current/curations.html#curations-destroy
+     * 
+     * @param engineName unique Engine name
+     * @param curationId unique Curation name
      *
      * @example
      *
@@ -553,6 +626,9 @@ declare module "@elastic/app-search-node" {
      * https://www.elastic.co/guide/en/app-search/current/engines.html
      * https://www.elastic.co/guide/en/app-search/current/meta-engines-guide.html
      *
+     * @param engineName unique Engine name
+     * @param sourceEngines list of engine names to use as source engines
+     * 
      * @example
      *
      * const engineName = "my-meta-engine";
@@ -577,6 +653,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/meta-engines.html#meta-engines-add-source-engines
      *
+     * @param engineName Name of Meta Engine
+     * @param sourceEngines Names of Engines to use as Source Engines
+     * 
      * @example
      *
      * const engineName = "my-meta-engine";
@@ -599,6 +678,9 @@ declare module "@elastic/app-search-node" {
      * Deletes a source engine from a given meta engine
      *
      * https://www.elastic.co/guide/en/app-search/current/meta-engines.html#meta-engines-remove-source-engines
+     * 
+     * @param engineName Name of Meta Engine
+     * @param sourceEngines Names of existing Source Engines to remove
      *
      * @example
      *
@@ -623,6 +705,8 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/schema.html#schema-read
      *
+     * @param engineName unique Engine name
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -641,6 +725,9 @@ declare module "@elastic/app-search-node" {
      *
      * https://www.elastic.co/guide/en/app-search/current/schema.html#schema-patch
      *
+     * @param engineName unique Engine name
+     * @param schema body of schema object
+     * 
      * @example
      *
      * const engineName = "favorite-videos";
@@ -708,7 +795,7 @@ declare module "@elastic/app-search-node" {
 
 declare module "@elastic/app-search-node/lib/client" {
   export = Client;
-  declare class Client {
+  class Client {
     constructor(apiKey: any, baseUrl: any);
     apiKey: string;
     clientName: string;
