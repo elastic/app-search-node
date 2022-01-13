@@ -24,6 +24,19 @@ To install this package, run:
 npm install @elastic/app-search-node
 ```
 
+## Importing
+
+```js
+// CommonJS
+const AppSearchClient = require('@elastic/app-search-node')
+
+// ES6 or a Typescript project *with* `esModuleInterop` enabled
+import AppSearchClient from '@elastic/app-search-node';
+
+// In a Typescript environment *without* `esModuleInterop` enabled
+import * as AppSearchClient from '@elastic/app-search-node';
+```
+
 ## Versioning
 
 This client is versioned and released alongside App Search.
