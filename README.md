@@ -28,7 +28,7 @@ npm install @elastic/app-search-node
 
 ```js
 // CommonJS
-const AppSearchClient = require('@elastic/app-search-node')
+const AppSearchClient = require('@elastic/app-search-node');
 
 // ES6 or a Typescript project *with* `esModuleInterop` enabled
 import AppSearchClient from '@elastic/app-search-node';
@@ -73,7 +73,7 @@ When using the [SaaS version available on swiftype.com](https://app.swiftype.com
 The `hostIdentifier` can be found within the [Credentials](https://app.swiftype.com/as#/credentials) menu.
 
 ```javascript
-const AppSearchClient = require('@elastic/app-search-node')
+const AppSearchClient = require('@elastic/app-search-node');
 const hostIdentifier = "host-c5s2mj";
 const apiKey = "private-mu75psc5egt9ppzuycnc2mc3";
 const client = new AppSearchClient(hostIdentifier, apiKey);
