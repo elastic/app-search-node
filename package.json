@@ -2,9 +2,6 @@
   "name": "@elastic/app-search-node",
   "version": "7.16.1-beta.0",
   "description": "Elastic App Search Node.js client",
-  "files": [
-    "lib/"
-  ],
   "main": "lib/appSearch.js",
   "types": "app-search-node.d.ts",
   "scripts": {
