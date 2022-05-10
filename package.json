@@ -1,6 +1,6 @@
 {
   "name": "@elastic/app-search-node",
-  "version": "8.1.0",
+  "version": "8.2.0",
   "description": "Elastic App Search Node.js client",
   "files": [
     "lib/"
@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "request": "^2.81.0",
-    "jsonwebtoken": "^8.1.1"
+    "jsonwebtoken": "^8.2.0"
   }
 }
