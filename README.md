@@ -4,7 +4,7 @@
 > deprecating this client.
 >
 > Our development effort on this project will be limited to bug fixes.
-> All future enhancements will be focused on the Enterprise Search PHP Client.
+> All future enhancements will be focused on the Enterprise Search Node Client.
 >
 > Thank you! - Elastic
 
