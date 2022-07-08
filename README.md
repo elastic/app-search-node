@@ -1,6 +1,6 @@
 > **⚠️ This client is deprecated ⚠️**
 >
-> As of Enterprise Search version 8.2.0, we are directing users to the new [Enterprise Search Node Client](https://github.com/elastic/enterprise-search-js) and
+> As of Enterprise Search version 8.3.2, we are directing users to the new [Enterprise Search Node Client](https://github.com/elastic/enterprise-search-js) and
 > deprecating this client.
 >
 > Our development effort on this project will be limited to bug fixes.
